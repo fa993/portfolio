@@ -5,7 +5,7 @@ import { ChangelogSection } from './components/ChangelogSection';
 
 export function App() {
   const [isBooting, setIsBooting] = useState(true);
-  const [activeTab, setActiveTab] = useState<'showcase' | 'career' | 'prs'>('showcase');
+  const [activeTab, setActiveTab] = useState<'showcase' | 'career' | 'prs' | 'education'>('showcase');
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
   if (isBooting) {
@@ -63,6 +63,12 @@ export function App() {
             [ Career & Timeline ]
           </button>
           <button 
+            onClick={() => setActiveTab('education')} 
+            className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'education' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
+          >
+            [ Education ]
+          </button>
+          <button 
             onClick={() => setActiveTab('prs')} 
             className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'prs' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
           >
@@ -74,6 +80,7 @@ export function App() {
         <div className="animate-fade-in-up min-h-[50vh]">
           {activeTab === 'showcase' && <ShowcaseGrid onSelect={setSelectedProject} />}
           {activeTab === 'career' && <CareerTimeline />}
+          {activeTab === 'education' && <EducationSection />}
           {activeTab === 'prs' && <ChangelogSection />}
         </div>
 
@@ -384,6 +391,107 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         </div>
         <div className="relative z-10 mt-4 flex items-center text-red-500 text-xs font-mono gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
           Read ICICKE 2025 Abstract <ExternalLink size={12} />
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+function EducationSection() {
+  return (
+    <div className="max-w-4xl mx-auto space-y-12 animate-fade-in-up">
+      
+      {/* University of Southern California */}
+      <div className="relative pl-8 border-l-2 border-emerald-500/30">
+        <div className="absolute w-4 h-4 bg-emerald-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+        
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white">University of Southern California</h2>
+            <div className="text-emerald-400 font-mono mt-1">Master of Science - Computer Science</div>
+          </div>
+          <div className="text-gray-500 font-mono text-sm mt-2 md:mt-0">Aug 2026 - Present</div>
+        </div>
+        
+        <div className="bg-[#111] border border-gray-800 rounded-xl p-5 mt-4">
+          <h3 className="text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Graduate Coursework</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="bg-white/5 border border-white/10 text-gray-300 px-3 py-1 rounded-md text-sm">Autonomous Cyber-Physical Systems</span>
+            <span className="bg-white/5 border border-white/10 text-gray-300 px-3 py-1 rounded-md text-sm">Analysis of Algorithms</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Vellore Institute of Technology */}
+      <div className="relative pl-8 border-l-2 border-gray-800">
+        <div className="absolute w-4 h-4 bg-gray-700 rounded-full -left-[9px] top-1"></div>
+        
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Vellore Institute of Technology</h2>
+            <div className="text-gray-300 font-mono mt-1">Bachelor of Engineering - Computer Science</div>
+          </div>
+          <div className="text-gray-500 font-mono text-sm mt-2 md:mt-0">Sept 2021 - Apr 2025</div>
+        </div>
+
+        {/* Academic Standings Metric Bar */}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <div className="bg-[#151515] border border-gray-800 rounded-lg px-4 py-2">
+            <span className="block text-emerald-400 font-bold text-xl">9.63</span>
+            <span className="text-[10px] text-gray-500 font-mono uppercase">CGPA / 10.0</span>
+          </div>
+          <div className="bg-[#151515] border border-gray-800 rounded-lg px-4 py-2">
+            <span className="block text-white font-bold text-xl">Top 0.5%</span>
+            <span className="text-[10px] text-gray-500 font-mono uppercase">In Department</span>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Core Systems Engineering</h3>
+            <div className="flex flex-wrap gap-2">
+              <span className="bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-md text-xs">Operating Systems</span>
+              <span className="bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-md text-xs">Compiler Design</span>
+              <span className="bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-md text-xs">Microprocessors & Microcontrollers</span>
+              <span className="bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-md text-xs">Data Structures & Algorithms</span>
+            </div>
+          </div>
+
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Specialized Electives</h3>
+            <div className="flex flex-wrap gap-2">
+              <span className="bg-purple-500/10 border border-purple-500/20 text-purple-300 px-3 py-1 rounded-md text-xs">Embedded Systems (RTOS & C)</span>
+              <span className="bg-blue-500/10 border border-blue-500/20 text-blue-300 px-3 py-1 rounded-md text-xs">Control Systems (Time/Freq Domain)</span>
+              <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-3 py-1 rounded-md text-xs">Deep Learning & Generative Models</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Honors & Awards Section */}
+      <div className="pt-8 border-t border-gray-800/50">
+        <h3 className="text-xl font-bold text-white mb-6">Academic Honors</h3>
+        <div className="space-y-4">
+          <div className="flex items-center gap-4 bg-[#111] border border-gray-800 rounded-lg p-4">
+            <div className="bg-yellow-500/10 text-yellow-500 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div>
+              <h4 className="text-white font-bold">INSPIRE National Scholarship</h4>
+              <p className="text-sm text-gray-400">Awarded for ranking in the top 1% statewide following 12th-grade examinations.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4 bg-[#111] border border-gray-800 rounded-lg p-4">
+            <div className="bg-yellow-500/10 text-yellow-500 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div>
+              <h4 className="text-white font-bold">Governor's Gold Medal</h4>
+              <p className="text-sm text-gray-400">Achieved highest honor post-10th grade for securing top scores across all subjects.</p>
+            </div>
+          </div>
         </div>
       </div>
 
