@@ -298,58 +298,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       </div>
 
       {/* Row 3 */}
-      {/* Tile 5: RPL & AUV (Wide, 2x1) */}
-      <div 
-        onClick={() => onSelect(projects.studentTeams)}
-        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 md:p-8 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-blue-500/50 transition-colors relative overflow-hidden flex items-center"
-      >
-        <div className="absolute bottom-0 left-1/2 w-64 h-32 bg-blue-500/5 rounded-full blur-3xl -ml-32 transition-all group-hover:bg-blue-500/10"></div>
-        <div className="relative z-10 w-full flex justify-between items-center">
-          <div className="max-w-[80%]">
-            <div className="text-blue-400 text-xs font-mono mb-3">Hardware & Dynamics</div>
-            <h2 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Rocket Propulsion Lab & AUV</h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.
-            </p>
-          </div>
-          <div className="text-gray-600 group-hover:text-blue-400 transition-colors translate-x-0 group-hover:translate-x-1 duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </div>
-      </div>
-
-      {/* Tile 6: USC LASER Lab (Standard Square, 1x1) */}
-      <div 
-        onClick={() => onSelect(projects.laserLab)}
-        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-purple-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
-      >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-purple-500/10"></div>
-        <div className="relative z-10">
-          <div className="text-purple-400 text-xs font-mono mb-3">Research</div>
-          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">USC LASER Lab</h2>
-          <p className="text-gray-400 text-xs leading-relaxed">
-            Coordinating experimental setups to advance uncertainty-aware exploration in autonomous systems.
-          </p>
-        </div>
-      </div>
-
-      {/* Tile 7: ESP32 Weather Network (Standard Square, 1x1) */}
-      <div 
-        onClick={() => onSelect(projects.weatherNetwork)}
-        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-cyan-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
-      >
-        <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-cyan-500/5 blur-3xl rounded-full transition-all group-hover:bg-cyan-500/10"></div>
-        <div className="relative z-10">
-          <div className="text-cyan-400 text-xs font-mono mb-3">IoT / Distributed</div>
-          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">ESP32 Weather Network</h2>
-          <p className="text-gray-400 text-xs leading-relaxed">
-            Distributed environmental telemetry.
-          </p>
-        </div>
-      </div>
-
-      {/* Row 4 */}
-      {/* Tile 8: Technical Writing & Rust FSM (Wide, 2x1) */}
+      {/* Tile 5: Technical Writing & Rust FSM (Wide, 2x1) */}
       <div 
         className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-[#F26522]/50 transition-colors relative overflow-hidden flex flex-col justify-between"
         onClick={() => onSelect(projects.rustFsm)}
@@ -376,7 +325,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         </div>
       </div>
 
-      {/* DDoS Prevention (Wide, 2x1) */}
+      {/* Tile 6: DDoS Prevention (Wide, 2x1) */}
       <div 
         onClick={() => onSelect(projects.ddos)}
         className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-red-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
@@ -391,6 +340,57 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         </div>
         <div className="relative z-10 mt-4 flex items-center text-red-500 text-xs font-mono gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
           Read ICICKE 2025 Abstract <ExternalLink size={12} />
+        </div>
+      </div>
+
+      {/* Row 4 */}
+      {/* Tile 7: RPL & AUV (Wide, 2x1) */}
+      <div 
+        onClick={() => onSelect(projects.studentTeams)}
+        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 md:p-8 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-blue-500/50 transition-colors relative overflow-hidden flex items-center"
+      >
+        <div className="absolute bottom-0 left-1/2 w-64 h-32 bg-blue-500/5 rounded-full blur-3xl -ml-32 transition-all group-hover:bg-blue-500/10"></div>
+        <div className="relative z-10 w-full flex justify-between items-center">
+          <div className="max-w-[80%]">
+            <div className="text-blue-400 text-xs font-mono mb-3">Hardware & Dynamics</div>
+            <h2 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Rocket Propulsion Lab & AUV</h2>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.
+            </p>
+          </div>
+          <div className="text-gray-600 group-hover:text-blue-400 transition-colors translate-x-0 group-hover:translate-x-1 duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Tile 8: USC LASER Lab (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.laserLab)}
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-purple-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-purple-500/10"></div>
+        <div className="relative z-10">
+          <div className="text-purple-400 text-xs font-mono mb-3">Research</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">USC LASER Lab</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Coordinating experimental setups to advance uncertainty-aware exploration in autonomous systems.
+          </p>
+        </div>
+      </div>
+
+      {/* Tile 9: ESP32 Weather Network (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.weatherNetwork)}
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-cyan-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-cyan-500/5 blur-3xl rounded-full transition-all group-hover:bg-cyan-500/10"></div>
+        <div className="relative z-10">
+          <div className="text-cyan-400 text-xs font-mono mb-3">IoT / Distributed</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">ESP32 Weather Network</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Distributed environmental telemetry.
+          </p>
         </div>
       </div>
 
@@ -462,9 +462,27 @@ function EducationSection() {
             <h3 className="text-sm font-bold text-gray-300 mb-3 uppercase tracking-wider">Specialized Electives</h3>
             <div className="flex flex-wrap gap-2">
               <span className="bg-purple-500/10 border border-purple-500/20 text-purple-300 px-3 py-1 rounded-md text-xs">Embedded Systems (RTOS & C)</span>
-              <span className="bg-blue-500/10 border border-blue-500/20 text-blue-300 px-3 py-1 rounded-md text-xs">Control Systems (Time/Freq Domain)</span>
-              <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-3 py-1 rounded-md text-xs">Deep Learning & Generative Models</span>
+              <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 px-3 py-1 rounded-md text-xs">Deep Learning & Machine Learning</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* NPTEL Certification */}
+      <div className="relative pl-8 border-l-2 border-blue-500/30">
+        <div className="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+        
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white">NPTEL Certification</h2>
+            <div className="text-blue-400 font-mono mt-1">Control Systems (Time/Freq Domain)</div>
+          </div>
+        </div>
+        
+        <div className="bg-[#111] border border-gray-800 rounded-xl p-5 mt-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="bg-[#222] border border-gray-700 text-white font-bold px-3 py-1.5 rounded text-sm whitespace-nowrap">🏆 Top 5% Candidate</span>
+            <span className="text-gray-400 text-sm leading-relaxed max-w-xl">Demonstrated advanced competency in continuous and discrete control theories, critical for hardware loops and edge robotics.</span>
           </div>
         </div>
       </div>
@@ -566,22 +584,14 @@ function CareerTimeline() {
       
       <div className="pt-8 border-t border-gray-800">
         <h2 className="text-2xl font-bold text-white pb-6 flex items-center gap-2">
-          <Database className="text-emerald-500" /> Core Technologies & Background
+          <Database className="text-emerald-500" /> Core Technologies
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-400">
+        <div className="text-gray-400">
           <div className="space-y-4">
             <h3 className="text-white font-semibold">Technical Stack</h3>
             <ul className="space-y-2 text-sm">
               <li><strong className="text-gray-300">Systems & Languages:</strong> Rust, Python, C/C++, Java, JavaScript/TypeScript, Dart, SQL.</li>
               <li><strong className="text-gray-300">Infrastructure & Cloud:</strong> Kubernetes, Docker, AWS EC2, Microsoft Azure, Linux, RTOS.</li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h3 className="text-white font-semibold">Honors & Academics</h3>
-            <ul className="space-y-2 text-sm">
-              <li><strong className="text-gray-300">MS in Computer Science:</strong> USC (Autonomous Cyber-Physical Systems).</li>
-              <li><strong className="text-gray-300">University Rankings:</strong> Top 0.5% (9.63 CGPA) from VIT.</li>
-              <li><strong className="text-gray-300">INSPIRE Scholarship:</strong> Top 1% statewide following 12th-grade.</li>
             </ul>
           </div>
         </div>
