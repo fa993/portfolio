@@ -157,9 +157,17 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       tags: ["Hardware", "Dynamics", "USC"],
       description: "Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.",
       warStoryContent: (
-        <div className="space-y-4">
-          <p>Bringing rigorous software engineering practices to complex hardware dynamics. Working closely with mechanical and aerospace teams to ensure telemetry and control loops are fault-tolerant and highly performant.</p>
-        </div>
+        <>
+          <h3>USC Rocket Propulsion Lab (Avionics)</h3>
+          <p>
+            As a core member of the embedded software team within the Avionics division, my focus is bridging the gap between raw hardware and reliable flight execution. I write and maintain low-level hardware drivers, working extremely closely with the electronics team to interface directly with custom PCBs and ensure critical flight telemetry is highly fault-tolerant.
+          </p>
+
+          <h3>Autonomous Underwater Vehicle (Software)</h3>
+          <p>
+            Operating within the software team for the AUV club, I actively collaborate with both the Autonomy and Controls sub-teams. My role centers around optimizing the submarine's state estimation and navigational control loops, improving the underlying algorithms that allow the vehicle to make split-second, autonomous trajectory decisions underwater.
+          </p>
+        </>
       )
     },
     sudoku: {
@@ -212,6 +220,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       title: "DDoS Prevention via GANs",
       tags: ["ICICKE 2025", "Edge AI"],
       description: "Synthesized benign network traffic for imbalanced Healthcare IoT (IoMT) datasets. Elevated classification accuracy to 99.61%.",
+      paperUrl: "https://ieeexplore.ieee.org/abstract/document/11136689",
       warStoryContent: (
         <p>Co-authored a paper published at the 2025 IEEE International Conference on Intelligent Computing and Knowledge Extraction. The lightweight GAN enables real-time edge deployment.</p>
       )
@@ -400,9 +409,15 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
             Synthesized benign network traffic for imbalanced Healthcare IoT (IoMT) datasets. Elevated DDoS classification accuracy from 97.13% to 99.61%, enabling real-time edge deployment.
           </p>
         </div>
-        <div className="relative z-10 mt-4 flex items-center text-red-500 text-xs font-mono gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+        <a 
+          href={projects.ddos.paperUrl} 
+          target="_blank" 
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="relative z-10 mt-4 flex items-center text-red-500 text-xs font-mono gap-1 opacity-80 hover:opacity-100 transition-opacity w-fit"
+        >
           Read ICICKE 2025 Abstract <ExternalLink size={12} />
-        </div>
+        </a>
       </div>
 
       {/* Row 4 */}
@@ -648,13 +663,40 @@ function CareerTimeline() {
         <h2 className="text-2xl font-bold text-white pb-6 flex items-center gap-2">
           <Database className="text-emerald-500" /> Core Technologies
         </h2>
-        <div className="text-gray-400">
-          <div className="space-y-4">
-            <h3 className="text-white font-semibold">Technical Stack</h3>
-            <ul className="space-y-2 text-sm">
-              <li><strong className="text-gray-300">Systems & Languages:</strong> Rust, Python, C/C++, Java, JavaScript/TypeScript, Dart, SQL.</li>
-              <li><strong className="text-gray-300">Infrastructure & Cloud:</strong> Kubernetes, Docker, AWS EC2, Microsoft Azure, Linux, RTOS.</li>
-            </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-bold mb-3 uppercase tracking-wider text-xs">Systems & Languages</h3>
+            <p className="text-gray-300 leading-relaxed">
+              Rust, C/C++, Python, Java (Spring Boot), TypeScript, JavaScript, Dart (Flutter), SQL.
+            </p>
+          </div>
+          
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-bold mb-3 uppercase tracking-wider text-xs">Infrastructure & Cloud</h3>
+            <p className="text-gray-300 leading-relaxed">
+              Kubernetes (Bare-Metal k3s), Docker, Microsoft Azure, Linux, NGINX.
+            </p>
+          </div>
+
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-bold mb-3 uppercase tracking-wider text-xs">Edge AI & Machine Learning</h3>
+            <p className="text-gray-300 leading-relaxed">
+              Local LLMs (Gemma 4), Vision Models (YOLOE), Generative Adversarial Networks (GANs), PyTorch.
+            </p>
+          </div>
+
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+            <h3 className="text-emerald-400 font-bold mb-3 uppercase tracking-wider text-xs">Hardware, IoT & Embedded</h3>
+            <p className="text-gray-300 leading-relaxed">
+              ESP32, SDR (Software Defined Radio), Reverse Engineering RF Protocols, RTOS, I2C/SPI, Hardware Relays.
+            </p>
+          </div>
+
+          <div className="bg-[#111] border border-gray-800 rounded-xl p-5 md:col-span-2">
+            <h3 className="text-emerald-400 font-bold mb-3 uppercase tracking-wider text-xs">Core Competencies & Architectures</h3>
+            <p className="text-gray-300 leading-relaxed">
+              High-Concurrency Distributed Systems, Exact Cover Algorithms (Dancing Links), Finite State Machines (FSMs), Zero-Downtime Database Migrations, Autonomous Closed-Loop Control.
+            </p>
           </div>
         </div>
       </div>
@@ -716,11 +758,16 @@ function SlideOverPanel({ project, onClose }: { project: any, onClose: () => voi
                 {project.warStoryContent}
               </div>
 
-              {(project.demoUrl || project.githubUrl || project.articleUrl) && (
+              {(project.demoUrl || project.githubUrl || project.articleUrl || project.paperUrl) && (
                 <div className="pt-6 border-t border-gray-800 flex flex-wrap gap-4">
                   {project.demoUrl && (
                     <a href={project.demoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-500/20 transition-colors">
                       <ExternalLink size={16} /> Live Demo
+                    </a>
+                  )}
+                  {project.paperUrl && (
+                    <a href={project.paperUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-500/20 transition-colors">
+                      <ExternalLink size={16} /> Read Paper
                     </a>
                   )}
                   {project.articleUrl && (
