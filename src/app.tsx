@@ -167,19 +167,44 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       title: "Algorithmic Sudoku Engine",
       tags: ["Algorithm X", "Web Workers", "React"],
       description: "Modeled Sudoku as an exact cover set problem. Implemented Donald Knuth's Algorithm X via Dancing Links in vanilla JS, paired with React and Web Workers.",
+      demoUrl: "https://fa993.github.io/sudoku/",
+      githubUrl: "https://github.com/fa993/sudoku",
       warStoryContent: (
-        <div className="space-y-4">
-          <p>Bypassed inefficient traditional solving approaches. By utilizing Web Workers, the engine achieves millisecond-level solving speeds without blocking the main browser thread, enabling a butter-smooth UI even on massive boards.</p>
-        </div>
+        <>
+          <h3>Algorithm X & Dancing Links</h3>
+          <p>
+            Traditional backtracking algorithms are far too slow for solving complex constraint satisfaction problems in real-time. By modeling the Sudoku board strictly as an <strong>exact cover set problem</strong>, I was able to implement Donald Knuth's <strong>Algorithm X</strong>.
+          </p>
+          <p>
+            This algorithm operates on a sparse matrix using a technique called "Dancing Links," traversing and un-linking nodes to traverse the search space with extreme efficiency.
+          </p>
+          
+          <h3>Browser Performance & JS Execution</h3>
+          <p>
+            The execution is so mathematically efficient that despite running natively in JavaScript—which is fundamentally constrained compared to compiled systems languages—it computes the complete exact cover solution almost instantaneously.
+          </p>
+          <p>
+            The engine doesn't pre-compute or store solutions; it computes the full board from scratch at the exact moment you press the solve button. The fact that the UI remains completely responsive and solves the board in milliseconds is a direct testament to the raw efficiency of the algorithm design over hardware acceleration.
+          </p>
+        </>
       )
     },
     manga: {
       id: "manga",
-      title: "MangaVerse: Distributed Data",
-      tags: ["Rust", "High-Load"],
-      description: "Resolved fragmented, multi-source data retrieval by engineering a unified abstraction caching layer. Reduced query latency by 50% across a 13GB dataset.",
+      title: "MangaVerse Ecosystem",
+      tags: ["Rust", "Java", "Flutter", "High-Load"],
+      description: "A full-stack ecosystem consisting of a Spring Boot Java backend, a Flutter mobile client, and a hyper-fast, re-architected Rust backend for 13GB+ distributed data caching.",
+      githubUrl: "https://github.com/search?q=user%3Afa993+topic%3Amangaverse&type=repositories",
       warStoryContent: (
-        <p>Originally built in Spring Boot and later re-architected in Rust for maximum performance. The new backend sustains massive high-load concurrency with virtually zero garbage collection pauses.</p>
+        <>
+          <p>
+            MangaVerse started as a complex, multi-source data retrieval problem. The original implementation included a <strong>Flutter mobile app</strong> paired with a <strong>Java (Spring Boot) backend</strong>.
+          </p>
+          <p>
+            However, to eliminate garbage collection pauses and drastically reduce query latency across a 13GB dataset, I re-architected the entire caching layer into a new, hyper-fast <strong>Rust backend</strong>.
+          </p>
+          <p><em>(Full technical war story regarding the Flutter app and Rust architecture coming soon...)</em></p>
+        </>
       )
     },
     ddos: {
@@ -207,6 +232,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       title: "From Rust to Riches: Decoding FSMs",
       tags: ["Medium", "Rust", "Architecture"],
       description: "A comprehensive technical guide to implementing FSMs in Rust, featuring a fully open-sourced UNO game engine codebase.",
+      articleUrl: "https://medium.com/gdg-vit/implementing-state-machines-in-rust-designing-uno-efba7288a379",
       warStoryContent: (
         <div className="space-y-4">
           <p>Authored a technical article breaking down complex state transitions using Rust's powerful type system. Open-sourced the accompanying UNO game engine to serve as a practical learning tool for the community.</p>
@@ -272,11 +298,23 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       >
         <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-orange-500/10"></div>
         <div className="relative z-10">
-          <div className="text-orange-400 text-xs font-mono mb-3">Rust / Distributed</div>
-          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-orange-400 transition-colors">MangaVerse Backend</h2>
+          <div className="text-orange-400 text-xs font-mono mb-3">Rust / Java / Flutter</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-orange-400 transition-colors">MangaVerse Ecosystem</h2>
           <p className="text-gray-400 text-xs leading-relaxed">
-            Unified abstraction caching layer handling 13GB of data. Reduced latency by 50%.
+            Full-stack ecosystem. The re-architected Rust backend reduced query latency across 13GB of data by 50%.
           </p>
+        </div>
+        <div className="relative z-10 flex items-center justify-end mt-4">
+          <a 
+            href={projects.manga.githubUrl} 
+            target="_blank" 
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-gray-500 hover:text-white transition-colors opacity-80 hover:opacity-100"
+            title="View Source on GitHub"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </a>
         </div>
       </div>
 
@@ -287,13 +325,31 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       >
         <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-emerald-500/5 blur-3xl rounded-full transition-all group-hover:bg-emerald-500/10"></div>
         <div className="relative z-10">
-          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-emerald-400 transition-colors">Algorithm X Engine</h2>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-emerald-400 transition-colors">Algorithm X Sudoku</h2>
           <p className="text-gray-400 text-xs leading-relaxed">
-            Donald Knuth's exact cover solver via Dancing Links.
+            Donald Knuth's exact cover solver via Dancing Links. Solves complex boards faster than the blink of an eye.
           </p>
         </div>
-        <div className="relative z-10 flex items-center gap-2 text-emerald-400 text-xs font-mono mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
-          Live Demo <ExternalLink size={12} />
+        <div className="relative z-10 flex items-center justify-between mt-4">
+          <a 
+            href={projects.sudoku.demoUrl} 
+            target="_blank" 
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center gap-2 text-emerald-400 text-xs font-mono opacity-80 hover:opacity-100 transition-opacity w-fit"
+          >
+            Live Demo <ExternalLink size={12} />
+          </a>
+          <a 
+            href={projects.sudoku.githubUrl} 
+            target="_blank" 
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="text-gray-500 hover:text-white transition-colors opacity-80 hover:opacity-100"
+            title="View Source on GitHub"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </a>
         </div>
       </div>
 
@@ -320,9 +376,15 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
           </p>
         </div>
         
-        <div className="flex items-center gap-2 text-[#F26522] text-xs font-mono mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
+        <a 
+          href={projects.rustFsm.articleUrl} 
+          target="_blank" 
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-2 text-[#F26522] text-xs font-mono mt-4 opacity-80 hover:opacity-100 transition-opacity w-fit"
+        >
           Read on Medium <ExternalLink size={12} />
-        </div>
+        </a>
       </div>
 
       {/* Tile 6: DDoS Prevention (Wide, 2x1) */}
@@ -633,7 +695,7 @@ function SlideOverPanel({ project, onClose }: { project: any, onClose: () => voi
                 <p className="text-lg text-gray-400 leading-relaxed">{project.description}</p>
               </div>
 
-              {project.imageUrl ? (
+              {project.imageUrl && (
                 <div className="space-y-3">
                   <div className="w-full h-48 sm:h-64 bg-[#111] border border-gray-800 rounded-lg overflow-hidden group">
                     <img 
@@ -648,17 +710,32 @@ function SlideOverPanel({ project, onClose }: { project: any, onClose: () => voi
                     </p>
                   )}
                 </div>
-              ) : (
-                <div className="w-full h-48 sm:h-64 bg-[#111] border border-gray-800 border-dashed rounded-lg flex items-center justify-center text-gray-600 font-mono text-sm overflow-hidden group">
-                  <div className="group-hover:scale-105 transition-transform duration-500">
-                    [ High-Res Image Placeholder ]
-                  </div>
-                </div>
               )}
 
               <div className="prose prose-invert prose-emerald max-w-none text-gray-300">
                 {project.warStoryContent}
               </div>
+
+              {(project.demoUrl || project.githubUrl || project.articleUrl) && (
+                <div className="pt-6 border-t border-gray-800 flex flex-wrap gap-4">
+                  {project.demoUrl && (
+                    <a href={project.demoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-emerald-500/20 transition-colors">
+                      <ExternalLink size={16} /> Live Demo
+                    </a>
+                  )}
+                  {project.articleUrl && (
+                    <a href={project.articleUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-[#F26522]/10 text-[#F26522] border border-[#F26522]/20 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#F26522]/20 transition-colors">
+                      <ExternalLink size={16} /> Read Article
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-gray-800 text-gray-300 border border-gray-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-700 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                      Source Code
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </>
         )}
