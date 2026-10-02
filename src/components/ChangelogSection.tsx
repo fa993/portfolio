@@ -8,7 +8,8 @@ const PRS = [
     repo: "esp-rs/esp-idf",
     date: "8 Nov 2025",
     status: "merged",
-    tags: ["Rust", "Embedded", "ESP32"]
+    tags: ["Rust", "Embedded", "ESP32"],
+    url: "https://github.com/esp-rs/esp-idf/pull/555"
   },
   {
     id: 2,
@@ -16,7 +17,8 @@ const PRS = [
     repo: "laakal/nestjs-better-auth-template",
     date: "6 Jul 2025",
     status: "merged",
-    tags: ["TypeScript", "NestJS", "Testing"]
+    tags: ["TypeScript", "NestJS", "Testing"],
+    url: "https://github.com/laakal/nestjs-better-auth-template/pull/1"
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const PRS = [
     repo: "plabayo/rama",
     date: "26 Jan 2025",
     status: "merged",
-    tags: ["Rust", "Networking", "Transport"]
+    tags: ["Rust", "Networking", "Transport"],
+    url: "https://github.com/plabayo/rama/pull/402"
   },
   {
     id: 4,
@@ -32,7 +35,8 @@ const PRS = [
     repo: "Miyoshi-Ryota/async-ssh2-tokio",
     date: "23 Jul 2024",
     status: "merged",
-    tags: ["Rust", "Async", "Tokio"]
+    tags: ["Rust", "Async", "Tokio"],
+    url: "https://github.com/Miyoshi-Ryota/async-ssh2-tokio/pull/68"
   },
   {
     id: 5,
@@ -40,7 +44,8 @@ const PRS = [
     repo: "Miyoshi-Ryota/async-ssh2-tokio",
     date: "21 Jul 2024",
     status: "merged",
-    tags: ["Rust", "Async", "Tokio"]
+    tags: ["Rust", "Async", "Tokio"],
+    url: "https://github.com/Miyoshi-Ryota/async-ssh2-tokio/pull/66"
   },
   {
     id: 6,
@@ -48,7 +53,8 @@ const PRS = [
     repo: "printfn/fend",
     date: "1 Nov 2023",
     status: "merged",
-    tags: ["Rust", "Parser"]
+    tags: ["Rust", "Parser"],
+    url: "https://github.com/printfn/fend/pull/244"
   },
   {
     id: 15,
@@ -56,7 +62,8 @@ const PRS = [
     repo: "rustic-rs/rustic",
     date: "23 Feb 2023",
     status: "merged",
-    tags: ["Rust", "CLI", "Security"]
+    tags: ["Rust", "CLI", "Security"],
+    url: "https://github.com/rustic-rs/rustic/pull/442"
   },
   {
     id: 16,
@@ -64,7 +71,8 @@ const PRS = [
     repo: "zhiburt/tabled",
     date: "21 Feb 2023",
     status: "merged",
-    tags: ["Rust", "Documentation"]
+    tags: ["Rust", "Documentation"],
+    url: "https://github.com/zhiburt/tabled/pull/291"
   }
 ];
 
@@ -112,7 +120,9 @@ export function ChangelogSection() {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between items-start gap-4">
-                <h3 className="text-white font-semibold group-hover:text-emerald-400 transition-colors leading-tight">{pr.title}</h3>
+                <a href={pr.url} target="_blank" rel="noreferrer" className="block text-white font-semibold group-hover:text-emerald-400 transition-colors leading-tight">
+                  <h3>{pr.title}</h3>
+                </a>
                 <span className="text-gray-600 text-xs font-mono whitespace-nowrap">{pr.date}</span>
               </div>
               <div className="text-gray-500 font-mono text-xs">Repo: {pr.repo}</div>

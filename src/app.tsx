@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { Mail, Database, X, ExternalLink, Play } from 'lucide-react';
+import { Mail, Database, X, ExternalLink } from 'lucide-react';
 import { BootSequence } from './components/BootSequence';
 import { ChangelogSection } from './components/ChangelogSection';
 
@@ -17,34 +17,33 @@ export function App() {
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-20 space-y-12">
         
         {/* Header / Hero */}
-        <header className="space-y-6 animate-fade-in-up">
-          <div className="space-y-2">
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-              Ameya Swapneel Kore
-            </h1>
-            <p className="text-xl md:text-2xl text-emerald-400 font-medium tracking-wide">
-              Software Engineer | Systems, Edge AI & Distributed Architecture
+        <header className="flex flex-col md:flex-row justify-between items-start gap-8 animate-fade-in-up">
+          <div className="space-y-6 max-w-2xl">
+            <div className="space-y-2">
+              <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                Ameya Swapneel Kore
+              </h1>
+              <p className="text-xl md:text-2xl text-emerald-400 font-medium tracking-wide">
+                Software Engineer | Systems, Edge AI & Distributed Architecture
+              </p>
+            </div>
+            
+            <p className="text-lg leading-relaxed text-gray-400">
+              Bridging the gap between hardware constraints and cloud-scale infrastructure. 
+              I build high-performance systems from bare-metal embedded microcontrollers 
+              to fault-tolerant telemetry pipelines.
             </p>
           </div>
-          
-          <p className="text-lg leading-relaxed text-gray-400 max-w-2xl">
-            Bridging the gap between hardware constraints and cloud-scale infrastructure. 
-            I build high-performance systems from bare-metal embedded microcontrollers 
-            to fault-tolerant telemetry pipelines.
-          </p>
 
-          <div className="flex flex-wrap gap-4 pt-2">
-            <a href="mailto:kore.ameya@gmail.com" className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-md transition-colors border border-white/10 text-sm">
-              <Mail size={16} />
-              <span>kore.ameya@gmail.com</span>
+          <div className="flex md:flex-col gap-6 md:pt-2">
+            <a href="mailto:kore.ameya@gmail.com" className="text-gray-500 hover:text-emerald-400 transition-colors" title="Email">
+              <Mail size={22} />
             </a>
-            <a href="https://github.com/fa993" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-md transition-colors border border-white/10 text-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-              <span>github.com/fa993</span>
+            <a href="https://github.com/fa993" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-emerald-400 transition-colors" title="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
             </a>
-            <a href="https://linkedin.com/in/ameya-kore-925620239" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-md transition-colors border border-white/10 text-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-              <span>LinkedIn</span>
+            <a href="https://linkedin.com/in/ameya-kore-925620239" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-emerald-400 transition-colors" title="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
           </div>
         </header>
@@ -104,10 +103,55 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       title: "Autonomous VLM Navigation",
       tags: ["ESP32", "Hardware", "VLM"],
       description: "Tore down an off-the-shelf RC car, reverse-engineered proprietary RF protocols, and soldered a custom ESP32 bridge directly to the PCB.",
+      imageUrl: "/assets/rc-car-hardware.jpg",
+      imageCaption: "Investigative phase: Hardware relays providing current sink protection for the ESP32, paired with an SDR antenna to sniff and decode proprietary RF control packets.",
+      warStoryContent: (
+        <>
+          <h3>The Inertia Drift Problem</h3>
+          <p>
+            During the development of my local, closed-loop control application—driven by an onboard <strong>VLM (YOLOE-26)</strong> and an <strong>LLM (Gemma 4)</strong>—I hit a major physics roadblock. My soldered ESP32 perfectly replicated the proprietary RF signals of the original remote, but hardware physics doesn't stop when the signal does.
+          </p>
+          <p>
+            When sending a forward actuation signal, the RC car's momentum would carry it past the exact bounds of the signal due to inertia. This seemingly random "drift" destroyed the deterministic behavioral modeling required by the VLM's spatial bounding box outputs.
+          </p>
+          
+          <h3>Hacking an ABS (Anti-Lock Braking System)</h3>
+          <p>
+            To regain tight control, I engineered a programmatic braking system based on the same principles as modern ABS. At the termination of every motion command, my orchestrator would fire a micro-burst of the <em>opposite</em> directional signal. This forced the motors to engage in reverse just enough to kill the forward momentum instantly.
+          </p>
+          <p>
+            This introduced a new issue: <strong>Over-calibration</strong>. If the secondary impulse was too strong, the car would visibly jerk backward. To solve this, I split the termination brake into two distinct, ultra-short impulses separated by a tiny delay gap, successfully smoothing out the deceleration without causing reverse drift.
+          </p>
+
+          <h3>Long-Route Command Queueing</h3>
+          <p>
+            While the split-impulse braking worked flawlessly for micro-adjustments, it broke down on longer, continuous navigation routes. Continuous sequences didn't have the luxury of time gaps to execute dual-burst braking safely between directional changes. 
+          </p>
+          <p>
+            To solve this, I approached the system state differently for extended sequences. I enabled tighter constraints for continuous routes and introduced <strong>on-device command queueing</strong>. The LLM orchestrator now pre-computes and chains continuous multi-step routes at the start of a navigation section, bypassing intermediate micro-braking and treating the entire maneuver as a single fluid execution before applying the final stop constraint.
+          </p>
+        </>
+      )
+    },
+    laserLab: {
+      id: "laser-lab",
+      title: "USC LASER Lab",
+      tags: ["Research", "Robotics"],
+      description: "Coordinating experimental setups to advance uncertainty-aware exploration in autonomous systems.",
       warStoryContent: (
         <div className="space-y-4">
-          <p>Traditional compute constraints on edge devices mean running a Vision-Language Model (VLM) locally is near impossible without aggressive optimization.</p>
-          <p>By sniffing the RF protocol with a logic analyzer, I was able to replicate the exact pulse width modulations using an ESP32. The VLM processes a camera feed at 15fps, outputting JSON bounding boxes that translate to instantaneous micro-burst motor actuations via the ESP32 bridge.</p>
+          <p>Detailed experimental coordination for uncertainty-aware exploration mapping. Assisting in setting up hardware-in-the-loop tests and verifying data pipelines for the lab's upcoming research initiatives.</p>
+        </div>
+      )
+    },
+    studentTeams: {
+      id: "student-teams",
+      title: "Rocket Propulsion Lab & AUV",
+      tags: ["Hardware", "Dynamics", "USC"],
+      description: "Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.",
+      warStoryContent: (
+        <div className="space-y-4">
+          <p>Bringing rigorous software engineering practices to complex hardware dynamics. Working closely with mechanical and aerospace teams to ensure telemetry and control loops are fault-tolerant and highly performant.</p>
         </div>
       )
     },
@@ -139,109 +183,207 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       warStoryContent: (
         <p>Co-authored a paper published at the 2025 IEEE International Conference on Intelligent Computing and Knowledge Extraction. The lightweight GAN enables real-time edge deployment.</p>
       )
+    },
+    weatherNetwork: {
+      id: "weather-network",
+      title: "ESP32 Weather Network",
+      tags: ["IoT", "ESP32", "Distributed"],
+      description: "Distributed environmental telemetry network across physical microcontrollers.",
+      warStoryContent: (
+        <div className="space-y-4">
+          <p>Built a mesh of ESP32 sensors communicating via MQTT. Hardened the devices for outdoor deployment and optimized sleep cycles to maximize battery life.</p>
+        </div>
+      )
+    },
+    rustFsm: {
+      id: "rust-fsm",
+      title: "From Rust to Riches: Decoding FSMs",
+      tags: ["Medium", "Rust", "Architecture"],
+      description: "A comprehensive technical guide to implementing FSMs in Rust, featuring a fully open-sourced UNO game engine codebase.",
+      warStoryContent: (
+        <div className="space-y-4">
+          <p>Authored a technical article breaking down complex state transitions using Rust's powerful type system. Open-sourced the accompanying UNO game engine to serve as a practical learning tool for the community.</p>
+        </div>
+      )
     }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[250px]">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[280px]">
       
-      {/* Tile 1: Infrastructure (Spans 2 columns on tablet/desktop) */}
+      {/* Tile 1: Bare-Metal K3s (Huge, 2x2 Feature) */}
       <div 
         onClick={() => onSelect(projects.infrastructure)}
-        className="md:col-span-2 relative bg-[#111] rounded-xl border border-gray-800 overflow-hidden group cursor-pointer hover:border-emerald-500/50 transition-colors"
+        className="md:col-span-2 md:row-span-2 relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-800/60 bg-[#111]"
       >
-        <div className="absolute inset-0 bg-[#1a1a1a]">
-          {/* Placeholder for physical desk setup photo */}
-          <div className="w-full h-full border-2 border-dashed border-gray-700 flex items-center justify-center text-gray-600 font-mono text-sm opacity-50 group-hover:opacity-70 transition-opacity">
-            [Photo: k3s Bare-Metal Desk Setup]
-          </div>
+        {/* Replace with <img src="/assets/k3s-desk-setup.jpg" ... /> when ready */}
+        <div className="absolute inset-0 w-full h-full border-2 border-dashed border-gray-700 flex items-center justify-center text-gray-600 font-mono text-sm opacity-50 transition-transform duration-1000 group-hover:scale-105">
+          [Photo: k3s Bare-Metal Desk Setup]
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-        <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-800">
-          <div className="relative flex items-center justify-center">
-            <div className="absolute w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
-            <div className="relative w-2 h-2 bg-emerald-500 rounded-full"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+        <div className="absolute bottom-8 left-8 right-8">
+          <div className="flex gap-2 mb-3">
+            <span className="flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider backdrop-blur-sm">
+              <div className="relative flex items-center justify-center">
+                <div className="absolute w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
+                <div className="relative w-2 h-2 bg-emerald-500 rounded-full"></div>
+              </div>
+              Live Host
+            </span>
           </div>
-          <span className="text-emerald-500 font-mono text-xs font-semibold">Live: bare-metal/node-1</span>
-        </div>
-        <div className="absolute bottom-0 left-0 p-6 space-y-2 w-full">
-          <h3 className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">Personal k3s Cluster</h3>
-          <p className="text-gray-300 text-sm max-w-lg hidden sm:block">You are currently being served by this cluster. Load balanced via Nginx & Helm with GitHub Pages failover.</p>
+          <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Home Lab</h2>
+          <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
+            You are looking at the exact physical hardware currently serving this portfolio.
+          </p>
         </div>
       </div>
 
-      {/* Tile 2: Hardware Hack (ESP32) */}
+      {/* Tile 2: Autonomous RC Car (Tall Vertical, 1x2) */}
       <div 
         onClick={() => onSelect(projects.rcCar)}
-        className="relative bg-[#111] rounded-xl border border-gray-800 overflow-hidden group cursor-pointer hover:border-emerald-500/50 transition-colors"
+        className="md:col-span-1 md:row-span-2 relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-800/60 bg-[#111]"
       >
-        <div className="absolute inset-0 bg-[#1a1a1a]">
-          <div className="w-full h-full border-2 border-dashed border-gray-700 flex items-center justify-center text-gray-600 font-mono text-sm opacity-50 group-hover:opacity-70 transition-opacity text-center px-4">
-            [Photo: Soldered ESP32 Board]
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-        <div className="absolute top-4 right-4 bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-1 rounded text-[10px] font-mono uppercase tracking-wider">Hardware</div>
-        <div className="absolute bottom-0 left-0 p-5 space-y-1 w-full">
-          <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-tight">Autonomous VLM Navigation</h3>
-          <p className="text-gray-400 text-xs">Reverse-engineered RF + Custom ESP32 Bridge</p>
+        <img 
+          src={projects.rcCar.imageUrl} 
+          alt="Soldered ESP32 Hardware" 
+          className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-black/20"></div>
+        <div className="absolute top-4 right-4 bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-1 rounded text-[10px] font-mono uppercase tracking-wider backdrop-blur-sm z-10">Hardware</div>
+        <div className="absolute bottom-6 left-6 right-6">
+          <h2 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">Autonomous VLM Navigation</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Hardware-modified RC platform with a soldered ESP32 bridge and on-device visual tracking.
+          </p>
         </div>
       </div>
 
-      {/* Tile 3: Interactive Algorithm (Sudoku) */}
-      <div 
-        onClick={() => onSelect(projects.sudoku)}
-        className="relative bg-[#111] rounded-xl border border-gray-800 overflow-hidden group cursor-pointer hover:border-emerald-500/50 transition-colors"
-      >
-        <div className="p-6 h-full flex flex-col justify-between relative z-10">
-          <div className="space-y-2">
-            <div className="bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-1 rounded text-[10px] font-mono w-fit uppercase tracking-wider">Algorithm</div>
-            <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-tight">Dancing Links Sudoku Solver</h3>
-            <p className="text-gray-400 text-xs">Algorithm X + Web Workers</p>
-          </div>
-          <button className="flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30 transition-colors text-sm font-semibold">
-            <Play size={14} /> Try Live Demo
-          </button>
-        </div>
-        {/* Background ambient effect */}
-        <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full"></div>
-      </div>
-
-      {/* Tile 4: MangaVerse */}
+      {/* Tile 3: MangaVerse Backend (Standard Square, 1x1) */}
       <div 
         onClick={() => onSelect(projects.manga)}
-        className="md:col-span-2 relative bg-[#111] rounded-xl border border-gray-800 p-6 group cursor-pointer hover:border-emerald-500/50 transition-colors flex flex-col sm:flex-row gap-6 items-center"
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-orange-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
       >
-         <div className="flex-1 space-y-3">
-            <div className="flex gap-2">
-              <span className="text-[10px] font-mono text-orange-400 bg-orange-400/10 px-2 py-1 rounded border border-orange-400/20">Rust</span>
-              <span className="text-[10px] font-mono text-gray-400 bg-gray-800 px-2 py-1 rounded border border-gray-700">Distributed</span>
-            </div>
-            <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">MangaVerse Backend</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">Unified abstraction caching layer handling 13GB of fragmented data. Rewritten from Spring Boot to Rust, cutting latency by 50% under massive load.</p>
-         </div>
-         <div className="w-full sm:w-48 h-32 bg-[#1a1a1a] rounded border border-gray-800 flex flex-col items-center justify-center relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
-            {/* Fake Grafana Chart SVG */}
-            <svg className="w-full h-full opacity-30 text-emerald-500" viewBox="0 0 100 40" preserveAspectRatio="none">
-              <path d="M0 40 L0 30 Q10 25 20 35 T40 20 T60 25 T80 10 T100 15 L100 40 Z" fill="currentColor" opacity="0.2"/>
-              <path d="M0 30 Q10 25 20 35 T40 20 T60 25 T80 10 T100 15" fill="none" stroke="currentColor" strokeWidth="2"/>
-            </svg>
-            <span className="absolute text-xs font-mono text-gray-500">[Latency Graph]</span>
-         </div>
+        <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-orange-500/10"></div>
+        <div className="relative z-10">
+          <div className="text-orange-400 text-xs font-mono mb-3">Rust / Distributed</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-orange-400 transition-colors">MangaVerse Backend</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Unified abstraction caching layer handling 13GB of data. Reduced latency by 50%.
+          </p>
+        </div>
       </div>
-      
-      {/* Tile 5: DDoS Prevention */}
+
+      {/* Tile 4: Sudoku Solver (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.sudoku)}
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-emerald-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-emerald-500/5 blur-3xl rounded-full transition-all group-hover:bg-emerald-500/10"></div>
+        <div className="relative z-10">
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-emerald-400 transition-colors">Algorithm X Engine</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Donald Knuth's exact cover solver via Dancing Links.
+          </p>
+        </div>
+        <div className="relative z-10 flex items-center gap-2 text-emerald-400 text-xs font-mono mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
+          Live Demo <ExternalLink size={12} />
+        </div>
+      </div>
+
+      {/* Row 3 */}
+      {/* Tile 5: RPL & AUV (Wide, 2x1) */}
+      <div 
+        onClick={() => onSelect(projects.studentTeams)}
+        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 md:p-8 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-blue-500/50 transition-colors relative overflow-hidden flex items-center"
+      >
+        <div className="absolute bottom-0 left-1/2 w-64 h-32 bg-blue-500/5 rounded-full blur-3xl -ml-32 transition-all group-hover:bg-blue-500/10"></div>
+        <div className="relative z-10 w-full flex justify-between items-center">
+          <div className="max-w-[80%]">
+            <div className="text-blue-400 text-xs font-mono mb-3">Hardware & Dynamics</div>
+            <h2 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Rocket Propulsion Lab & AUV</h2>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.
+            </p>
+          </div>
+          <div className="text-gray-600 group-hover:text-blue-400 transition-colors translate-x-0 group-hover:translate-x-1 duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Tile 6: USC LASER Lab (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.laserLab)}
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-purple-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-purple-500/10"></div>
+        <div className="relative z-10">
+          <div className="text-purple-400 text-xs font-mono mb-3">Research</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">USC LASER Lab</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Coordinating experimental setups to advance uncertainty-aware exploration in autonomous systems.
+          </p>
+        </div>
+      </div>
+
+      {/* Tile 7: ESP32 Weather Network (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.weatherNetwork)}
+        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-cyan-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-cyan-500/5 blur-3xl rounded-full transition-all group-hover:bg-cyan-500/10"></div>
+        <div className="relative z-10">
+          <div className="text-cyan-400 text-xs font-mono mb-3">IoT / Distributed</div>
+          <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">ESP32 Weather Network</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Distributed environmental telemetry.
+          </p>
+        </div>
+      </div>
+
+      {/* Row 4 */}
+      {/* Tile 8: Technical Writing & Rust FSM (Wide, 2x1) */}
+      <div 
+        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-[#F26522]/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+        onClick={() => onSelect(projects.rustFsm)}
+      >
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#F26522]/5 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-[#F26522]/10"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-[#F26522] text-xs font-mono font-bold bg-[#F26522]/10 px-2 py-1 rounded">Medium Publication</span>
+            <span className="text-gray-500 text-xs flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              100+ Claps
+            </span>
+          </div>
+          
+          <h2 className="text-xl font-bold text-white mb-2 group-hover:text-[#F26522] transition-colors">From Rust to Riches: Decoding Finite State Machines</h2>
+          <p className="text-gray-400 text-sm leading-relaxed max-w-lg">
+            A comprehensive technical guide to implementing FSMs in Rust, featuring a fully open-sourced UNO game engine codebase to demonstrate state transitions.
+          </p>
+        </div>
+        
+        <div className="flex items-center gap-2 text-[#F26522] text-xs font-mono mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
+          Read on Medium <ExternalLink size={12} />
+        </div>
+      </div>
+
+      {/* DDoS Prevention (Wide, 2x1) */}
       <div 
         onClick={() => onSelect(projects.ddos)}
-        className="relative bg-[#111] rounded-xl border border-gray-800 p-6 group cursor-pointer hover:border-emerald-500/50 transition-colors flex flex-col justify-between"
+        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-red-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
       >
-        <div className="space-y-3">
-          <div className="bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-1 rounded text-[10px] font-mono w-fit uppercase tracking-wider">Research</div>
-          <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-tight">DDoS Prevention via GANs</h3>
-          <p className="text-gray-400 text-xs leading-relaxed">Synthesized benign network traffic for imbalanced Healthcare IoT datasets. 99.61% accuracy.</p>
+        <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-red-500/5 blur-3xl rounded-full transition-all group-hover:bg-red-500/10"></div>
+        <div className="relative z-10 space-y-3">
+          <div className="text-red-400 text-xs font-mono mb-3">Research & Security</div>
+          <h2 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-red-400 transition-colors">DDoS Prevention via GANs</h2>
+          <p className="text-gray-400 text-xs leading-relaxed max-w-lg">
+            Synthesized benign network traffic for imbalanced Healthcare IoT (IoMT) datasets. Elevated DDoS classification accuracy from 97.13% to 99.61%, enabling real-time edge deployment.
+          </p>
         </div>
-        <div className="mt-4 flex items-center text-emerald-500 text-xs font-mono gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          Read Abstract <ExternalLink size={12} />
+        <div className="relative z-10 mt-4 flex items-center text-red-500 text-xs font-mono gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+          Read ICICKE 2025 Abstract <ExternalLink size={12} />
         </div>
       </div>
 
@@ -373,11 +515,28 @@ function SlideOverPanel({ project, onClose }: { project: any, onClose: () => voi
                 <p className="text-lg text-gray-400 leading-relaxed">{project.description}</p>
               </div>
 
-              <div className="w-full h-48 sm:h-64 bg-[#111] border border-gray-800 border-dashed rounded-lg flex items-center justify-center text-gray-600 font-mono text-sm overflow-hidden group">
-                <div className="group-hover:scale-105 transition-transform duration-500">
-                  [ High-Res Image Placeholder ]
+              {project.imageUrl ? (
+                <div className="space-y-3">
+                  <div className="w-full h-48 sm:h-64 bg-[#111] border border-gray-800 rounded-lg overflow-hidden group">
+                    <img 
+                      src={project.imageUrl} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  {project.imageCaption && (
+                    <p className="text-gray-500 text-xs font-mono border-l-2 border-emerald-500/50 pl-3 leading-relaxed">
+                      {project.imageCaption}
+                    </p>
+                  )}
                 </div>
-              </div>
+              ) : (
+                <div className="w-full h-48 sm:h-64 bg-[#111] border border-gray-800 border-dashed rounded-lg flex items-center justify-center text-gray-600 font-mono text-sm overflow-hidden group">
+                  <div className="group-hover:scale-105 transition-transform duration-500">
+                    [ High-Res Image Placeholder ]
+                  </div>
+                </div>
+              )}
 
               <div className="prose prose-invert prose-emerald max-w-none text-gray-300">
                 {project.warStoryContent}
