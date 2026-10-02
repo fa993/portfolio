@@ -146,9 +146,9 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       tags: ["Research", "Robotics"],
       description: "Coordinating experimental setups to advance uncertainty-aware exploration in autonomous systems.",
       warStoryContent: (
-        <div className="space-y-4">
-          <p>Detailed experimental coordination for uncertainty-aware exploration mapping. Assisting in setting up hardware-in-the-loop tests and verifying data pipelines for the lab's upcoming research initiatives.</p>
-        </div>
+        <p>
+          Operating within the USC Laboratory for Autonomous Systems and Essential Robotics (LASER Lab), I coordinate experimental setups to advance uncertainty-aware exploration in autonomous systems.
+        </p>
       )
     },
     studentTeams: {
@@ -205,13 +205,21 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       githubUrl: "https://github.com/search?q=user%3Afa993+topic%3Amangaverse&type=repositories",
       warStoryContent: (
         <>
+          <h3>Scaling the Backend</h3>
           <p>
-            MangaVerse started as a complex, multi-source data retrieval problem. The original implementation included a <strong>Flutter mobile app</strong> paired with a <strong>Java (Spring Boot) backend</strong>.
+            On the infrastructure side, MangaVerse started as a complex, multi-source data retrieval problem paired with a <strong>Java (Spring Boot) backend</strong>. To eliminate garbage collection pauses and drastically reduce query latency across a 13GB dataset, I eventually re-architected the entire caching layer into a hyper-fast <strong>Rust backend</strong>.
+          </p>
+
+          <h3>The iOS Hot CPU Loop</h3>
+          <p>
+            During the development of the <strong>Flutter mobile app</strong> for MangaVerse, I implemented a small, always-on overlay widget to display the device's current battery level. During simulation and emulated tests, the battery read call essentially functioned as a safe no-op.
           </p>
           <p>
-            However, to eliminate garbage collection pauses and drastically reduce query latency across a 13GB dataset, I re-architected the entire caching layer into a new, hyper-fast <strong>Rust backend</strong>.
+            However, when I deployed it to physical hardware, I encountered a massive performance discrepancy between operating systems. On Android, the underlying native battery read is a rate-limited function call. But on iOS, the system call returned instantaneously. Because Flutter's UI rebuilds were tied to this un-throttled stream, the iOS device instantly entered a hot CPU loop.
           </p>
-          <p><em>(Full technical war story regarding the Flutter app and Rust architecture coming soon...)</em></p>
+          <p>
+            The app inadvertently spun up all of the iPhone's performance cores just to read a simple battery percentage, causing severe battery drain and thermal throttling. I had to architect a custom throttling mechanism at the Dart layer to intentionally throttle the iOS stream and protect the device's hardware resources.
+          </p>
         </>
       )
     },
@@ -228,12 +236,17 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
     weatherNetwork: {
       id: "weather-network",
       title: "ESP32 Weather Network",
-      tags: ["IoT", "ESP32", "Distributed"],
-      description: "Distributed environmental telemetry network across physical microcontrollers.",
+      tags: ["IoT", "ESP32", "Sensors"],
+      description: "A foundational hardware starter project featuring temperature and humidity sensors publishing to a centralized aggregation server.",
       warStoryContent: (
-        <div className="space-y-4">
-          <p>Built a mesh of ESP32 sensors communicating via MQTT. Hardened the devices for outdoor deployment and optimized sleep cycles to maximize battery life.</p>
-        </div>
+        <>
+          <p>
+            This was a foundational, "starter" foray into embedded systems and IoT. The hardware setup was intentionally simple: an ESP32 microcontroller wired to a basic <strong>temperature and humidity sensor</strong> and an onboard <strong>LCD screen</strong> for local readings.
+          </p>
+          <p>
+            The software side introduced me to distributed telemetry. The ESP32 published its sensor readings over the network to a central backend server, which continuously ingested the data and maintained the aggregate environmental information. It proved to be the perfect stepping stone into the world of connected hardware.
+          </p>
+        </>
       )
     },
     rustFsm: {
@@ -466,7 +479,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
           <div className="text-cyan-400 text-xs font-mono mb-3">IoT / Distributed</div>
           <h2 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">ESP32 Weather Network</h2>
           <p className="text-gray-400 text-xs leading-relaxed">
-            Distributed environmental telemetry.
+            Foundational hardware telemetry. ESP32 publishing sensor data to a central aggregation server.
           </p>
         </div>
       </div>
