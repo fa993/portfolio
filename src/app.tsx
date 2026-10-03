@@ -110,7 +110,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       title: "Autonomous VLM Navigation",
       tags: ["ESP32", "Hardware", "VLM"],
       description: "Tore down an off-the-shelf RC car, reverse-engineered proprietary RF protocols, and soldered a custom ESP32 bridge directly to the PCB.",
-      imageUrl: "/assets/rc-car-hardware.jpg",
+      imageUrl: "./assets/rc-car-hardware.jpg",
       imageCaption: "Investigative phase: Hardware relays providing current sink protection for the ESP32, paired with an SDR antenna to sniff and decode proprietary RF control packets.",
       warStoryContent: (
         <>

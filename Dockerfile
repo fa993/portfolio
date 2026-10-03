@@ -4,8 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-ARG BASE_PATH=/
-RUN npm run build -- --base=${BASE_PATH}
+RUN npm run build
 
 # Stage 2: Serve the assets using Nginx
 FROM nginx:alpine
