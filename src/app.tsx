@@ -364,7 +364,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         <div className="absolute -inset-1 bg-emerald-500/30 rounded-2xl blur-xl animate-pulse group-hover:bg-emerald-500/50 group-hover:blur-2xl transition-all duration-700"></div>
         
         <div className="relative h-full w-full rounded-2xl overflow-hidden border border-emerald-500/40 bg-[#111] transition-all duration-700">
-          <img src="./assets/k3s-desk-setup.jpg" alt="Raspberry Pi cluster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" />
+          {/* <img src="./assets/k3s-desk-setup.jpg" alt="Raspberry Pi cluster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" /> */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent"></div>
           <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-1.5 md:gap-2 items-end z-10">
             <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">Llama.cpp + Jellyfin</span>
