@@ -134,7 +134,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-[#111] border border-gray-800 rounded-lg p-4">
                 <div className="text-purple-400 text-xs font-mono mb-1">AI / Inference</div>
-                <div className="text-white font-bold mb-1">Llama.cpp & Open WebUI</div>
+                <div className="text-white font-bold mb-1">Llama.cpp</div>
                 <p className="text-gray-500 text-xs">Self-hosted, localized LLM inference pipeline running entirely on edge hardware.</p>
               </div>
               
@@ -366,12 +366,10 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         <div className="relative h-full w-full rounded-2xl overflow-hidden border border-emerald-500/40 bg-[#111] transition-all duration-700">
           <img src="./assets/k3s-desk-setup.jpg" alt="Raspberry Pi cluster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent"></div>
-          
-          <div className="absolute top-6 right-6 flex flex-col gap-2 items-end z-10">
-            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Llama.cpp + Open WebUI</span>
-            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">ClickHouse & Mosquitto</span>
-            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Nginx Ingress</span>
-            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Jellyfin Media Server</span>
+          <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-1.5 md:gap-2 items-end z-10">
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">Llama.cpp + Jellyfin</span>
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">ClickHouse & Mosquitto</span>
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">Nginx Ingress</span>
           </div>
 
         <div className="absolute bottom-8 left-8 right-8 z-10">
@@ -382,8 +380,8 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
             </span>
             <span className="text-gray-400 text-xs font-mono">2x Raspberry Pi</span>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Edge Cluster</h2>
-          <p className="text-gray-300 text-sm leading-relaxed max-w-md">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Edge Cluster</h2>
+          <p className="text-gray-300 text-xs md:text-sm leading-relaxed max-w-md line-clamp-3 md:line-clamp-none">
             A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry—behind a custom Nginx reverse proxy.
           </p>
         </div>
@@ -884,13 +882,19 @@ function ClusterTopologyModal({ project, onClose }: { project: any, onClose: () 
                     <span className="text-[10px] text-gray-500">High-Performance Column Store</span>
                   </a>
                   <a href="https://raspi.share.zrok.io/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/</span> <span className="text-purple-400 font-bold">Llama.cpp API</span></div>
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/</span> <span className="text-purple-400 font-bold">Llama.cpp</span></div>
                     <span className="text-[10px] text-gray-500">Local LLM Inference</span>
                   </a>
-                  <a href="mailto:kore.ameya@gmail.com?subject=Ben%2010%20Watch%20Party%20%F0%9F%91%BD" className="block bg-[#1a1a1a] hover:bg-indigo-950/30 transition-colors px-3 py-2 rounded border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.1)] text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/jellyfin</span> <span className="text-indigo-400 font-bold">Media Server</span></div>
-                    <span className="text-[10px] text-indigo-300/80 italic">Reach out if you want to catch up on a few episodes of Ben 10! 👽🍿</span>
-                  </a>
+                  <div className="relative block bg-[#1a1a1a] hover:bg-indigo-950/30 transition-colors px-3 py-2 rounded border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.1)] text-xs text-gray-300 flex flex-col justify-center group/jellyfin">
+                    <a href="https://raspi.share.zrok.io/jellyfin" target="_blank" rel="noreferrer" className="absolute inset-0 z-0"></a>
+                    <div className="flex justify-between w-full mb-1 relative z-10 pointer-events-none">
+                      <span className="font-mono">/jellyfin</span> 
+                      <span className="text-indigo-400 font-bold group-hover/jellyfin:text-indigo-300 transition-colors">Media Server</span>
+                    </div>
+                    <span className="text-[10px] text-indigo-300/80 italic relative z-10 pointer-events-none">
+                      <a href="mailto:kore.ameya@gmail.com?subject=Ben%2010%20Watch%20Party%20%F0%9F%91%BD" className="underline hover:text-indigo-200 pointer-events-auto transition-colors" title="Send email">Reach out</a> if you want to catch up on a few episodes of Ben 10! 👽🍿
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
