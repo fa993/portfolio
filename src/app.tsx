@@ -359,7 +359,7 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[280px]">
       
       {/* Updated Tile 1: Bare-Metal K3s (Huge, 2x2 Feature) */}
-      <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer" onClick={() => onSelect(projects.infrastructure)}>
+      <div className="col-span-1 row-span-2 md:col-span-2 relative group cursor-pointer" onClick={() => onSelect(projects.infrastructure)}>
         {/* Pulsing Aura */}
         <div className="absolute -inset-1 bg-emerald-500/30 rounded-2xl blur-xl animate-pulse group-hover:bg-emerald-500/50 group-hover:blur-2xl transition-all duration-700"></div>
         
@@ -381,8 +381,8 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
             <span className="text-gray-400 text-xs font-mono">2x Raspberry Pi</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Edge Cluster</h2>
-          <p className="text-gray-300 text-xs md:text-sm leading-relaxed max-w-md line-clamp-3 md:line-clamp-none">
-            A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry—behind a custom Nginx reverse proxy.
+          <p className="text-gray-300 text-xs md:text-sm leading-relaxed max-w-md">
+            A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry. <strong className="text-emerald-400 font-normal">Fun fact: this exact portfolio is being served from it right now!</strong>
           </p>
         </div>
       </div>
@@ -869,6 +869,10 @@ function ClusterTopologyModal({ project, onClose }: { project: any, onClose: () 
                 <div className="text-gray-600 md:hidden">↓</div>
 
                 <div className="flex flex-col gap-2 w-full md:w-1/3">
+                  <a href="https://raspi.share.zrok.io/portfolio/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)] text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/portfolio</span> <span className="text-emerald-400 font-bold">Vite SPA</span></div>
+                    <span className="text-[10px] text-gray-400 italic">You are here! (Self-hosted)</span>
+                  </a>
                   <a href="https://raspi.share.zrok.io/kittens/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
                     <div className="flex justify-between w-full mb-1"><span className="font-mono">/kittens</span> <span className="text-orange-400 font-bold">Multiplayer WS</span></div>
                     <span className="text-[10px] text-gray-500">Exploding Kittens Game Server</span>
