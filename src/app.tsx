@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { Mail, Database, X, ExternalLink } from 'lucide-react';
+import { Mail, Database, X, ExternalLink, Server, Activity, Shield, Network, MonitorPlay, Menu } from 'lucide-react';
 import { BootSequence } from './components/BootSequence';
 import { ChangelogSection } from './components/ChangelogSection';
 
@@ -8,9 +8,16 @@ export function App() {
   const [activeTab, setActiveTab] = useState<'showcase' | 'career' | 'prs' | 'education'>('showcase');
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   if (isBooting) {
     return <BootSequence onComplete={() => setIsBooting(false)} />;
   }
+
+  const handleTabChange = (tab: 'showcase' | 'career' | 'prs' | 'education') => {
+    setActiveTab(tab);
+    setIsNavOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans selection:bg-emerald-500/30 pb-16">
@@ -49,31 +56,39 @@ export function App() {
         </header>
 
         {/* Tabbed Navigation */}
-        <div className="flex bg-[#111] p-1 border border-gray-800 rounded-md w-fit overflow-x-auto max-w-full">
-          <button 
-            onClick={() => setActiveTab('showcase')} 
-            className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'showcase' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
-          >
-            [ Showcase ]
-          </button>
-          <button 
-            onClick={() => setActiveTab('career')} 
-            className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'career' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
-          >
-            [ Career & Timeline ]
-          </button>
-          <button 
-            onClick={() => setActiveTab('education')} 
-            className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'education' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
-          >
-            [ Education ]
-          </button>
-          <button 
-            onClick={() => setActiveTab('prs')} 
-            className={`px-4 py-2 text-sm font-mono rounded whitespace-nowrap transition-colors ${activeTab === 'prs' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
-          >
-            [ PR Archive ]
-          </button>
+        <div className="relative">
+          {/* Mobile Toggle Button */}
+          <div className="md:hidden flex items-center justify-between bg-[#111] border border-gray-800 rounded-md px-4 py-3 mb-2 cursor-pointer" onClick={() => setIsNavOpen(!isNavOpen)}>
+            <span className="text-white font-mono text-sm capitalize">{activeTab === 'prs' ? 'PR Archive' : activeTab}</span>
+            <Menu size={18} className="text-gray-400" />
+          </div>
+
+          <div className={`${isNavOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row bg-[#111] p-1 border border-gray-800 rounded-md w-full md:w-fit gap-1`}>
+            <button 
+              onClick={() => handleTabChange('showcase')} 
+              className={`px-4 py-3 md:py-2 text-left md:text-center text-sm font-mono rounded transition-colors ${activeTab === 'showcase' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
+            >
+              [ Showcase ]
+            </button>
+            <button 
+              onClick={() => handleTabChange('career')} 
+              className={`px-4 py-3 md:py-2 text-left md:text-center text-sm font-mono rounded transition-colors ${activeTab === 'career' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
+            >
+              [ Career & Timeline ]
+            </button>
+            <button 
+              onClick={() => handleTabChange('education')} 
+              className={`px-4 py-3 md:py-2 text-left md:text-center text-sm font-mono rounded transition-colors ${activeTab === 'education' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
+            >
+              [ Education ]
+            </button>
+            <button 
+              onClick={() => handleTabChange('prs')} 
+              className={`px-4 py-3 md:py-2 text-left md:text-center text-sm font-mono rounded transition-colors ${activeTab === 'prs' ? 'bg-[#222] text-white shadow-sm border border-gray-700' : 'text-gray-400 hover:text-white border border-transparent'}`}
+            >
+              [ PR Archive ]
+            </button>
+          </div>
         </div>
 
         {/* Dynamic Content Area */}
@@ -86,7 +101,11 @@ export function App() {
 
       </div>
 
-      <SlideOverPanel project={selectedProject} onClose={() => setSelectedProject(null)} />
+      {selectedProject?.id === 'infra' ? (
+        <ClusterTopologyModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      ) : (
+        <SlideOverPanel project={selectedProject} onClose={() => setSelectedProject(null)} />
+      )}
     </div>
   );
 }
@@ -99,9 +118,82 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       tags: ["Bare-Metal", "Kubernetes", "Helm", "Nginx"],
       description: "You are currently hitting my personal multi-node k3s Kubernetes cluster, running on bare-metal Raspberry Pi hardware right on my desk.",
       warStoryContent: (
-        <div className="space-y-4">
-          <p>This cluster utilizes Nginx reverse proxies and Helm charts to manage traffic, backed by a load balancer that seamlessly fails over to a stable GitHub Pages proxy if the bare metal goes down.</p>
-          <p>This home lab doesn't just host my portfolio—it's the playground where I deploy everything from ClickHouse databases and Mosquitto MQTT brokers to self-hosted instances of Llama.cpp, Open WebUI, and Jellyfin.</p>
+        <div className="space-y-8 animate-fade-in">
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-2">Bare-Metal k3s Cluster</h2>
+            <p className="text-emerald-400 font-mono text-sm">Hardware: Raspberry Pi Multi-Node | Orchestration: Helm + k3s</p>
+          </div>
+
+          <p className="text-gray-400 leading-relaxed text-sm">
+            This portfolio isn't just hosted on the cloud; it's being served directly from my desk. I maintain a 2-node k3s Kubernetes cluster on Raspberry Pi hardware to continuously deploy, test, and host my own edge architecture.
+          </p>
+
+          {/* Service Topology Grid */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold border-b border-gray-800 pb-2">Active Workloads</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-[#111] border border-gray-800 rounded-lg p-4">
+                <div className="text-purple-400 text-xs font-mono mb-1">AI / Inference</div>
+                <div className="text-white font-bold mb-1">Llama.cpp & Open WebUI</div>
+                <p className="text-gray-500 text-xs">Self-hosted, localized LLM inference pipeline running entirely on edge hardware.</p>
+              </div>
+              
+              <div className="bg-[#111] border border-gray-800 rounded-lg p-4">
+                <div className="text-blue-400 text-xs font-mono mb-1">Data & Telemetry</div>
+                <div className="text-white font-bold mb-1">ClickHouse & Mosquitto</div>
+                <p className="text-gray-500 text-xs">High-performance column-oriented database paired with an MQTT broker for IoT streams.</p>
+              </div>
+
+              <div className="bg-[#111] border border-gray-800 rounded-lg p-4">
+                <div className="text-yellow-400 text-xs font-mono mb-1">Media</div>
+                <div className="text-white font-bold mb-1">Jellyfin</div>
+                <p className="text-gray-500 text-xs">Local media streaming server deployed and managed via custom Helm charts.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* The Ingress / Reverse Proxy Code Block */}
+          <div className="space-y-4">
+            <h3 className="text-white font-bold border-b border-gray-800 pb-2">Traffic Routing & Ingress</h3>
+            <p className="text-gray-400 text-sm">
+              To expose these services (including this portfolio app) safely, traffic is routed through a custom Nginx reverse proxy deployment. It utilizes ConfigMaps generated by Helm to dynamically mount routing rules to the Alpine containers.
+            </p>
+            
+            {/* Stylized Code Window */}
+            <div className="bg-[#0d1117] rounded-lg border border-gray-800 overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-2 bg-[#161b22] border-b border-gray-800">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+                <span className="ml-2 text-xs text-gray-500 font-mono">nginx-deployment.yaml</span>
+              </div>
+              <div className="p-4 overflow-x-auto">
+                <pre className="text-[11px] font-mono leading-relaxed text-gray-300">
+                  <code>
+<span className="text-blue-400">apiVersion:</span> apps/v1{'\n'}
+<span className="text-blue-400">kind:</span> Deployment{'\n'}
+<span className="text-blue-400">metadata:</span>{'\n'}
+  <span className="text-emerald-400">name:</span> nginx-backend{'\n'}
+<span className="text-blue-400">spec:</span>{'\n'}
+  <span className="text-emerald-400">replicas:</span> 1{'\n'}
+  <span className="text-blue-400">template:</span>{'\n'}
+    <span className="text-blue-400">spec:</span>{'\n'}
+      <span className="text-blue-400">containers:</span>{'\n'}
+      - <span className="text-emerald-400">name:</span> nginx{'\n'}
+        <span className="text-emerald-400">image:</span> nginx:alpine{'\n'}
+        <span className="text-blue-400">volumeMounts:</span>{'\n'}
+        - <span className="text-emerald-400">name:</span> config{'\n'}
+          <span className="text-emerald-400">mountPath:</span> /etc/nginx/conf.d/default.conf{'\n'}
+          <span className="text-emerald-400">subPath:</span> default.conf{'\n'}
+      <span className="text-blue-400">volumes:</span>{'\n'}
+      - <span className="text-emerald-400">name:</span> config{'\n'}
+        <span className="text-blue-400">configMap:</span>{'\n'}
+          <span className="text-emerald-400">name:</span> {'{{ include "raspi-app.fullname" . }}-nginx-conf'}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </div>
         </div>
       )
     },
@@ -266,50 +358,59 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[280px]">
       
-      {/* Tile 1: Bare-Metal K3s (Huge, 2x2 Feature) */}
-      <div 
-        onClick={() => onSelect(projects.infrastructure)}
-        className="md:col-span-2 md:row-span-2 relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-800/60 bg-[#111]"
-      >
-        {/* Replace with <img src="/assets/k3s-desk-setup.jpg" ... /> when ready */}
-        <div className="absolute inset-0 w-full h-full border-2 border-dashed border-gray-700 flex items-center justify-center text-gray-600 font-mono text-sm opacity-50 transition-transform duration-1000 group-hover:scale-105">
-          [Photo: k3s Bare-Metal Desk Setup]
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
-        <div className="absolute bottom-8 left-8 right-8">
-          <div className="flex gap-2 mb-3">
-            <span className="flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider backdrop-blur-sm">
-              <div className="relative flex items-center justify-center">
-                <div className="absolute w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping opacity-75"></div>
-                <div className="relative w-2 h-2 bg-emerald-500 rounded-full"></div>
-              </div>
-              Live Host
-            </span>
+      {/* Updated Tile 1: Bare-Metal K3s (Huge, 2x2 Feature) */}
+      <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer" onClick={() => onSelect(projects.infrastructure)}>
+        {/* Pulsing Aura */}
+        <div className="absolute -inset-1 bg-emerald-500/30 rounded-2xl blur-xl animate-pulse group-hover:bg-emerald-500/50 group-hover:blur-2xl transition-all duration-700"></div>
+        
+        <div className="relative h-full w-full rounded-2xl overflow-hidden border border-emerald-500/40 bg-[#111] transition-all duration-700">
+          <img src="./assets/k3s-desk-setup.jpg" alt="Raspberry Pi cluster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent"></div>
+          
+          <div className="absolute top-6 right-6 flex flex-col gap-2 items-end z-10">
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Llama.cpp + Open WebUI</span>
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">ClickHouse & Mosquitto</span>
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Nginx Ingress</span>
+            <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[10px] font-mono px-2 py-1 rounded">Jellyfin Media Server</span>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Home Lab</h2>
-          <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
-            You are looking at the exact physical hardware currently serving this portfolio.
+
+        <div className="absolute bottom-8 left-8 right-8 z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="flex items-center gap-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+              Active Node
+            </span>
+            <span className="text-gray-400 text-xs font-mono">2x Raspberry Pi</span>
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Edge Cluster</h2>
+          <p className="text-gray-300 text-sm leading-relaxed max-w-md">
+            A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry—behind a custom Nginx reverse proxy.
           </p>
         </div>
       </div>
+      </div>
 
-      {/* Tile 2: Autonomous RC Car (Tall Vertical, 1x2) */}
-      <div 
-        onClick={() => onSelect(projects.rcCar)}
-        className="md:col-span-1 md:row-span-2 relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-800/60 bg-[#111]"
-      >
-        <img 
-          src={projects.rcCar.imageUrl} 
-          alt="Soldered ESP32 Hardware" 
-          className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-black/20"></div>
-        <div className="absolute top-4 right-4 bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-1 rounded text-[10px] font-mono uppercase tracking-wider backdrop-blur-sm z-10">Hardware</div>
-        <div className="absolute bottom-6 left-6 right-6">
-          <h2 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">Autonomous VLM Navigation</h2>
-          <p className="text-gray-400 text-xs leading-relaxed">
-            Hardware-modified RC platform with a soldered ESP32 bridge and on-device visual tracking.
-          </p>
+      {/* Tile 2: Autonomous RC Car (Wide Horizontal, 2x1) */}
+      <div className="md:col-span-2 md:row-span-1 relative group cursor-pointer" onClick={() => onSelect(projects.rcCar)}>
+        {/* Pulsing Aura */}
+        <div className="absolute -inset-1 bg-purple-500/40 rounded-2xl blur-xl animate-pulse group-hover:bg-purple-500/60 group-hover:blur-2xl transition-all duration-700"></div>
+
+        <div className="relative h-full w-full rounded-2xl overflow-hidden border border-purple-500/30 bg-[#111] transition-all duration-700">
+          <img 
+            src={projects.rcCar.imageUrl} 
+            alt="Soldered ESP32 Hardware" 
+            className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent"></div>
+          
+          <div className="absolute top-4 right-4 bg-purple-500/20 text-purple-400 border border-purple-500/30 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm z-10 flex items-center gap-1.5"><span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></span>Hardware</div>
+          
+          <div className="absolute bottom-6 left-6 right-6">
+            <h2 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">Autonomous VLM Navigation</h2>
+            <p className="text-gray-300 text-xs leading-relaxed max-w-lg">
+              Hardware-modified RC platform with a soldered ESP32 bridge and on-device visual tracking.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -714,6 +815,107 @@ function CareerTimeline() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ClusterTopologyModal({ project, onClose }: { project: any, onClose: () => void }) {
+  if (!project) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-fade-in">
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose}></div>
+      <div className="relative w-full max-w-5xl bg-[#0a0a0a] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        
+        {/* Header */}
+        <div className="flex justify-between items-start p-6 border-b border-gray-800 bg-[#111]">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Server size={18} className="text-emerald-400" />
+              <h2 className="text-2xl font-bold text-white">Live Cluster Topology</h2>
+            </div>
+            <p className="text-gray-400 text-sm">Real-time architecture mapping of the bare-metal edge nodes.</p>
+          </div>
+          <button onClick={onClose} className="text-gray-500 hover:text-white transition-colors bg-[#1a1a1a] p-2 rounded-full border border-gray-800">
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 overflow-y-auto space-y-8 custom-scrollbar">
+          
+          {/* Edge Architecture Diagram */}
+          <div>
+            <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Network size={16} className="text-blue-400"/> Ingress & Routing</h3>
+            <div className="bg-[#111] border border-gray-800 rounded-xl p-5 relative">
+              <p className="text-sm text-gray-300 mb-6">
+                All external traffic to the cluster is securely tunneled through a single ingress point. Inside the cluster, a highly-configured Nginx reverse proxy actively handles SSL termination, subpath-based routing, and SPA fallbacks before seamlessly passing connections to the appropriate microservices.
+              </p>
+              
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex flex-col items-center bg-[#1a1a1a] p-4 rounded-lg border border-gray-700 w-full md:w-1/3 text-center">
+                  <Shield className="text-orange-400 mb-2" size={24} />
+                  <span className="text-white font-bold text-sm">Secure Tunnel</span>
+                  <span className="text-gray-500 text-[10px] font-mono mt-1 mb-1">raspi.share.zrok.io</span>
+                  <span className="text-gray-600 text-[9px] uppercase tracking-wider">Single Entry Point</span>
+                </div>
+                
+                <div className="text-gray-600 hidden md:block">→</div>
+                <div className="text-gray-600 md:hidden">↓</div>
+                
+                <div className="flex flex-col items-center bg-[#1a1a1a] p-4 rounded-lg border border-emerald-500/30 w-full md:w-1/3 text-center shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                  <Server className="text-emerald-400 mb-2" size={24} />
+                  <span className="text-white font-bold text-sm">Nginx Proxy</span>
+                  <span className="text-gray-500 text-xs mt-1">Subpath Routing & Ingress</span>
+                </div>
+
+                <div className="text-gray-600 hidden md:block">→</div>
+                <div className="text-gray-600 md:hidden">↓</div>
+
+                <div className="flex flex-col gap-2 w-full md:w-1/3">
+                  <a href="https://raspi.share.zrok.io/kittens/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/kittens</span> <span className="text-orange-400 font-bold">Multiplayer WS</span></div>
+                    <span className="text-[10px] text-gray-500">Exploding Kittens Game Server</span>
+                  </a>
+                  <a href="https://raspi.share.zrok.io/mqtt/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/mqtt</span> <span className="text-emerald-400 font-bold">Mosquitto MQTT</span></div>
+                    <span className="text-[10px] text-gray-500">IoT Telemetry Broker</span>
+                  </a>
+                  <a href="https://raspi.share.zrok.io/clickhouse/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/clickhouse</span> <span className="text-blue-400 font-bold">Analysis DB</span></div>
+                    <span className="text-[10px] text-gray-500">High-Performance Column Store</span>
+                  </a>
+                  <a href="https://raspi.share.zrok.io/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/</span> <span className="text-purple-400 font-bold">Llama.cpp API</span></div>
+                    <span className="text-[10px] text-gray-500">Local LLM Inference</span>
+                  </a>
+                  <a href="mailto:kore.ameya@gmail.com?subject=Ben%2010%20Watch%20Party%20%F0%9F%91%BD" className="block bg-[#1a1a1a] hover:bg-indigo-950/30 transition-colors px-3 py-2 rounded border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.1)] text-xs text-gray-300 flex flex-col justify-center">
+                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/jellyfin</span> <span className="text-indigo-400 font-bold">Media Server</span></div>
+                    <span className="text-[10px] text-indigo-300/80 italic">Reach out if you want to catch up on a few episodes of Ben 10! 👽🍿</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Observability Stack */}
+          <div>
+            <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Activity size={16} className="text-red-400"/> Monitoring & Observability</h3>
+            <div className="bg-[#111] border border-gray-800 rounded-xl p-5">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="text-white font-bold">Grafana Dashboards</h4>
+                <MonitorPlay size={16} className="text-gray-500" />
+              </div>
+              <p className="text-gray-400 text-sm mb-4 max-w-2xl">
+                Comprehensive real-time telemetry visualizing node health, container resource allocation, and network ingestion rates across the cluster.
+              </p>
+              <a href="https://raspi.share.zrok.io/status/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-400/10 px-3 py-1.5 rounded-md hover:bg-emerald-400/20 transition-colors">
+                View Live Metrics <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   );
 }
 
