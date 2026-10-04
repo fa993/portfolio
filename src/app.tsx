@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { Mail, Database, X, ExternalLink, Server, Activity, Shield, Network, MonitorPlay, Menu } from 'lucide-react';
+import { Mail, Database, X, ExternalLink, Server, Activity, Shield, Network, MonitorPlay, Menu, FileText } from 'lucide-react';
 import { BootSequence } from './components/BootSequence';
 import { ChangelogSection } from './components/ChangelogSection';
 
@@ -51,6 +51,9 @@ export function App() {
             </a>
             <a href="https://linkedin.com/in/ameya-kore-925620239" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-emerald-400 transition-colors" title="LinkedIn">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="./assets/ameyaresume21.pdf" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-emerald-400 transition-colors" title="Resume">
+              <FileText size={22} />
             </a>
           </div>
         </header>
