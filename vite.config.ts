@@ -6,4 +6,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: '',
   plugins: [preact(), tailwindcss()],
+  build: {
+    outDir: process.env.VITE_PLATFORM === 'github' ? 'docs' : 'dist'
+  }
 })

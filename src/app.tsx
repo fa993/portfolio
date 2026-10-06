@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import { Mail, Database, X, ExternalLink, Server, Activity, Shield, Network, MonitorPlay, Menu, FileText } from 'lucide-react';
+import { Mail, Database, X, ExternalLink, Server, Activity, Shield, Network, MonitorPlay, Menu, FileText, Globe } from 'lucide-react';
 import { BootSequence } from './components/BootSequence';
 import { ChangelogSection } from './components/ChangelogSection';
 
@@ -119,7 +119,9 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       id: "infra",
       title: "Personal k3s Kubernetes Cluster",
       tags: ["Bare-Metal", "Kubernetes", "Helm", "Nginx"],
-      description: "You are currently hitting my personal multi-node k3s Kubernetes cluster, running on bare-metal Raspberry Pi hardware right on my desk.",
+      description: import.meta.env.VITE_PLATFORM === 'github'
+        ? "You are currently viewing the fallback site on GitHub Pages. Usually, this hits my personal multi-node k3s Kubernetes cluster on Raspberry Pi hardware."
+        : "You are currently hitting my personal multi-node k3s Kubernetes cluster, running on bare-metal Raspberry Pi hardware right on my desk.",
       warStoryContent: (
         <div className="space-y-8 animate-fade-in">
           <div>
@@ -128,7 +130,10 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
           </div>
 
           <p className="text-gray-400 leading-relaxed text-sm">
-            This portfolio isn't just hosted on the cloud; it's being served directly from my desk. I maintain a 2-node k3s Kubernetes cluster on Raspberry Pi hardware to continuously deploy, test, and host my own edge architecture.
+            {import.meta.env.VITE_PLATFORM === 'github' 
+              ? "Normally, this portfolio isn't hosted on the cloud; it's served directly from my desk. Right now, you're viewing a secondary GitHub Pages deployment because my 2-node k3s Raspberry Pi cluster is down for maintenance or hardware upgrades."
+              : "This portfolio isn't just hosted on the cloud; it's being served directly from my desk. I maintain a 2-node k3s Kubernetes cluster on Raspberry Pi hardware to continuously deploy, test, and host my own edge architecture."
+            }
           </p>
 
           {/* Service Topology Grid */}
@@ -367,8 +372,10 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         <div className="absolute -inset-1 bg-emerald-500/30 rounded-2xl blur-xl animate-pulse group-hover:bg-emerald-500/50 group-hover:blur-2xl transition-all duration-700"></div>
         
         <div className="relative h-full w-full rounded-2xl overflow-hidden border border-emerald-500/40 bg-[#111] transition-all duration-700">
-          {/* <img src="./assets/k3s-desk-setup.jpg" alt="Raspberry Pi cluster" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" /> */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent"></div>
+          <div className="absolute top-0 left-0 w-full h-[60%] overflow-hidden">
+            <img src="./assets/k3sserver.jpeg" alt="Bare-Metal k3s Server" className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105 opacity-80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/40 to-transparent"></div>
+          </div>
           <div className="absolute top-4 right-4 md:top-6 md:right-6 flex flex-col gap-1.5 md:gap-2 items-end z-10">
             <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">Llama.cpp + Jellyfin</span>
             <span className="bg-black/50 backdrop-blur-md border border-gray-700 text-gray-300 text-[9px] md:text-[10px] font-mono px-2 py-1 rounded">ClickHouse & Mosquitto</span>
@@ -385,7 +392,17 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Bare-Metal k3s Edge Cluster</h2>
           <p className="text-gray-300 text-xs md:text-sm leading-relaxed max-w-md">
-            A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry. <strong className="text-emerald-400 font-normal">Fun fact: this exact portfolio is being served from it right now!</strong>
+            A multi-node home lab orchestrating heavy edge workloads—from local LLM inference to MQTT telemetry. 
+            {import.meta.env.VITE_PLATFORM === 'github' ? (
+              <>
+                <strong className="text-emerald-400/50 font-normal line-through decoration-emerald-500/50 decoration-wavy ml-1">Fun fact: this exact portfolio is being served from it right now!</strong>
+                <span className="text-orange-400 font-bold block mt-1">
+                  Wait, it seems my cluster is currently down! You are viewing a secondary fallback site hosted on GitHub Pages.
+                </span>
+              </>
+            ) : (
+              <strong className="text-emerald-400 font-normal ml-1">Fun fact: this exact portfolio is being served from it right now!</strong>
+            )}
           </p>
         </div>
       </div>
@@ -848,65 +865,120 @@ function ClusterTopologyModal({ project, onClose }: { project: any, onClose: () 
             <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Network size={16} className="text-blue-400"/> Ingress & Routing</h3>
             <div className="bg-[#111] border border-gray-800 rounded-xl p-5 relative">
               <p className="text-sm text-gray-300 mb-6">
-                All external traffic to the cluster is securely tunneled through a single ingress point. Inside the cluster, a highly-configured Nginx reverse proxy actively handles SSL termination, subpath-based routing, and SPA fallbacks before seamlessly passing connections to the appropriate microservices.
+                Traffic entering the public domain (<a href="https://www.ameyakore.com/portfolio/" target="_blank" rel="noreferrer" className="text-blue-400 hover:underline">ameyakore.com</a>) hits a primary Nginx Loadbalancer, which intelligently splits requests. It forwards core cluster traffic to the secure zrok tunnel, while seamlessly failing over to a GitHub Pages deployment if the local k3s node goes offline. Once inside the cluster, a highly-configured Nginx reverse proxy actively handles SSL termination, subpath-based routing, and SPA fallbacks before seamlessly passing connections to the appropriate microservices.
               </p>
               
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex flex-col items-center bg-[#1a1a1a] p-4 rounded-lg border border-gray-700 w-full md:w-1/3 text-center">
-                  <Shield className="text-orange-400 mb-2" size={24} />
-                  <span className="text-white font-bold text-sm">Secure Tunnel</span>
-                  <span className="text-gray-500 text-[10px] font-mono mt-1 mb-1">raspi.share.zrok.io</span>
-                  <span className="text-gray-600 text-[9px] uppercase tracking-wider">Single Entry Point</span>
-                </div>
-                
-                <div className="text-gray-600 hidden md:block">→</div>
-                <div className="text-gray-600 md:hidden">↓</div>
-                
-                <div className="flex flex-col items-center bg-[#1a1a1a] p-4 rounded-lg border border-emerald-500/30 w-full md:w-1/3 text-center shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                  <Server className="text-emerald-400 mb-2" size={24} />
-                  <span className="text-white font-bold text-sm">Nginx Proxy</span>
-                  <span className="text-gray-500 text-xs mt-1">Subpath Routing & Ingress</span>
-                </div>
+              <div className="w-full overflow-x-auto pb-6 custom-scrollbar">
+                <div className="grid grid-cols-[140px_30px_140px_30px_140px_30px_140px_30px_240px] grid-rows-2 gap-y-4 items-center min-w-[1000px] pt-4">
+                  
+                  {/* Col 1: Public Domain */}
+                  <div className="col-start-1 row-start-1 row-span-2 flex flex-col justify-center">
+                    <a href="https://www.ameyakore.com/portfolio/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] p-4 rounded-lg border text-center transition-all hover:bg-[#222] ${import.meta.env.VITE_PLATFORM === 'github' ? 'border-orange-500/50 shadow-[0_0_15px_rgba(249,115,22,0.15)]' : 'border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.15)]'}`}>
+                      <Globe className="text-blue-400 mb-2 mx-auto" size={24} />
+                      <span className="text-white font-bold text-sm block">Public Domain</span>
+                      <span className="text-gray-500 text-[10px] font-mono mt-1 mb-1 block">Global DNS</span>
+                    </a>
+                  </div>
 
-                <div className="text-gray-600 hidden md:block">→</div>
-                <div className="text-gray-600 md:hidden">↓</div>
+                  {/* Col 2: Arrow */}
+                  <div className={`col-start-2 row-start-1 row-span-2 flex justify-center font-bold ${import.meta.env.VITE_PLATFORM === 'github' ? 'text-orange-500' : 'text-emerald-500'}`}>→</div>
 
-                <div className="flex flex-col gap-2 w-full md:w-1/3">
-                  <a href="https://raspi.share.zrok.io/portfolio/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.1)] text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/portfolio</span> <span className="text-emerald-400 font-bold">Vite SPA</span></div>
-                    <span className="text-[10px] text-gray-400 italic">You are here! (Self-hosted)</span>
-                  </a>
-                  <a href="https://raspi.share.zrok.io/kittens/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/kittens</span> <span className="text-orange-400 font-bold">Multiplayer WS</span></div>
-                    <span className="text-[10px] text-gray-500">Exploding Kittens Game Server</span>
-                  </a>
-                  <a href="https://raspi.share.zrok.io/mqtt/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/mqtt</span> <span className="text-emerald-400 font-bold">Mosquitto MQTT</span></div>
-                    <span className="text-[10px] text-gray-500">IoT Telemetry Broker</span>
-                  </a>
-                  <a href="https://raspi.share.zrok.io/clickhouse/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/clickhouse</span> <span className="text-blue-400 font-bold">Analysis DB</span></div>
-                    <span className="text-[10px] text-gray-500">High-Performance Column Store</span>
-                  </a>
-                  <a href="https://raspi.share.zrok.io/" target="_blank" rel="noreferrer" className="block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center">
-                    <div className="flex justify-between w-full mb-1"><span className="font-mono">/</span> <span className="text-purple-400 font-bold">Llama.cpp</span></div>
-                    <span className="text-[10px] text-gray-500">Local LLM Inference</span>
-                  </a>
-                  <div className="relative block bg-[#1a1a1a] hover:bg-indigo-950/30 transition-colors px-3 py-2 rounded border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.1)] text-xs text-gray-300 flex flex-col justify-center group/jellyfin">
-                    <a href="https://raspi.share.zrok.io/jellyfin" target="_blank" rel="noreferrer" className="absolute inset-0 z-0"></a>
-                    <div className="flex justify-between w-full mb-1 relative z-10 pointer-events-none">
-                      <span className="font-mono">/jellyfin</span> 
-                      <span className="text-indigo-400 font-bold group-hover/jellyfin:text-indigo-300 transition-colors">Media Server</span>
+                  {/* Col 3: Nginx LB */}
+                  <div className="col-start-3 row-start-1 row-span-2 flex flex-col justify-center">
+                    <div className={`bg-[#1a1a1a] p-4 rounded-lg border text-center transition-all ${import.meta.env.VITE_PLATFORM === 'github' ? 'border-orange-500/50 shadow-[0_0_15px_rgba(249,115,22,0.15)]' : 'border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.15)]'}`}>
+                      <Network className="text-emerald-400 mb-2 mx-auto" size={24} />
+                      <span className="text-white font-bold text-sm block">Nginx LB</span>
+                      <span className="text-gray-500 text-xs mt-1 block">Traffic Splitter</span>
                     </div>
-                    <span className="text-[10px] text-indigo-300/80 italic relative z-10 pointer-events-none">
-                      <a href="mailto:kore.ameya@gmail.com?subject=Ben%2010%20Watch%20Party%20%F0%9F%91%BD" className="underline hover:text-indigo-200 pointer-events-auto transition-colors" title="Send email">Reach out</a> if you want to catch up on a few episodes of Ben 10! 👽🍿
-                    </span>
+                  </div>
+
+                  {/* Col 4: Top Arrow */}
+                  <div className={`col-start-4 row-start-1 flex justify-center font-bold ${import.meta.env.VITE_PLATFORM === 'github' ? 'text-orange-500' : 'text-gray-600'}`}>↗</div>
+                  
+                  {/* Col 4: Bottom Arrow */}
+                  <div className={`col-start-4 row-start-2 flex justify-center font-bold ${import.meta.env.VITE_PLATFORM !== 'github' ? 'text-emerald-500' : 'text-gray-600'}`}>↘</div>
+
+                  {/* Col 5, Row 1: GitHub Pages */}
+                  <div className="col-start-5 row-start-1 flex flex-col justify-center">
+                    <a href="https://fa993.github.io/portfolio/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] p-4 rounded-lg border text-center transition-all relative ${import.meta.env.VITE_PLATFORM === 'github' ? 'border-orange-500/50 shadow-[0_0_15px_rgba(249,115,22,0.15)] hover:bg-[#222]' : 'border-gray-700 opacity-50 hover:opacity-100 hover:bg-[#222]'}`}>
+                      {import.meta.env.VITE_PLATFORM === 'github' && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-500 text-black text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-[0_0_10px_rgba(249,115,22,0.5)]">You are here!</div>
+                      )}
+                      <svg className="text-white mb-2 mx-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                      <span className="text-white font-bold text-sm block">GitHub Pages</span>
+                      <span className="text-gray-500 text-[10px] block mt-1">Fallback SPA</span>
+                    </a>
+                  </div>
+
+                  {/* Col 5, Row 2: zrok Tunnel */}
+                  <div className="col-start-5 row-start-2 flex flex-col justify-center">
+                    <a href="https://raspi.share.zrok.io/helloworld" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] p-4 rounded-lg border text-center transition-all relative ${import.meta.env.VITE_PLATFORM !== 'github' ? 'border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:bg-[#222]' : 'border-gray-700 opacity-50 hover:opacity-100 hover:bg-[#222]'}`}>
+                      <Shield className={`mb-2 mx-auto ${import.meta.env.VITE_PLATFORM !== 'github' ? 'text-emerald-400' : 'text-orange-400'}`} size={24} />
+                      <span className="text-white font-bold text-sm block">zrok Tunnel</span>
+                      <span className="text-gray-500 text-[10px] font-mono block mt-1">raspi.share.zrok.io</span>
+                    </a>
+                  </div>
+
+                  {/* Col 6: Bottom Arrow */}
+                  <div className={`col-start-6 row-start-2 flex justify-center font-bold ${import.meta.env.VITE_PLATFORM !== 'github' ? 'text-emerald-500' : 'text-gray-600 opacity-50'}`}>→</div>
+
+                  {/* Col 7, Row 2: k3s Nginx Proxy */}
+                  <div className="col-start-7 row-start-2 flex flex-col justify-center">
+                    <div className={`bg-[#1a1a1a] p-4 rounded-lg border text-center transition-all ${import.meta.env.VITE_PLATFORM !== 'github' ? 'border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.15)]' : 'border-gray-700 opacity-50'}`}>
+                      <Server className="text-emerald-400 mb-2 mx-auto" size={24} />
+                      <span className="text-white font-bold text-sm block">k3s Nginx</span>
+                      <span className="text-gray-500 text-[10px] block mt-1">Cluster Ingress</span>
+                    </div>
+                  </div>
+
+                  {/* Col 8: Bottom Arrow */}
+                  <div className={`col-start-8 row-start-2 flex justify-center font-bold ${import.meta.env.VITE_PLATFORM !== 'github' ? 'text-emerald-500' : 'text-gray-600 opacity-50'}`}>→</div>
+
+                  {/* Col 9: Workloads */}
+                  <div className="col-start-9 row-start-1 row-span-2 flex flex-col gap-2 transition-all">
+                    <a href="https://raspi.share.zrok.io/portfolio/" target="_blank" rel="noreferrer" className={`relative block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border text-xs text-gray-300 flex flex-col justify-center ${import.meta.env.VITE_PLATFORM === 'github' ? 'border-gray-700 opacity-50 grayscale' : 'border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.15)]'}`}>
+                      {import.meta.env.VITE_PLATFORM !== 'github' && (
+                        <div className="absolute -top-3 right-4 bg-emerald-500 text-black text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-[0_0_10px_rgba(16,185,129,0.5)]">You are here!</div>
+                      )}
+                      <div className="flex justify-between w-full mb-1">
+                        <span className="font-mono">/portfolio</span> 
+                        <span className="text-emerald-400 font-bold">Vite SPA</span>
+                      </div>
+                      <span className="text-[10px] text-gray-500">
+                        Self-hosted
+                      </span>
+                    </a>
+                    <a href="https://raspi.share.zrok.io/kittens/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center ${import.meta.env.VITE_PLATFORM === 'github' ? 'opacity-50 grayscale' : ''}`}>
+                      <div className="flex justify-between w-full mb-1"><span className="font-mono">/kittens</span> <span className="text-orange-400 font-bold">Multiplayer WS</span></div>
+                      <span className="text-[10px] text-gray-500">Exploding Kittens Game Server</span>
+                    </a>
+                    <a href="https://raspi.share.zrok.io/mqtt/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center ${import.meta.env.VITE_PLATFORM === 'github' ? 'opacity-50 grayscale' : ''}`}>
+                      <div className="flex justify-between w-full mb-1"><span className="font-mono">/mqtt</span> <span className="text-emerald-400 font-bold">Mosquitto MQTT</span></div>
+                      <span className="text-[10px] text-gray-500">IoT Telemetry Broker</span>
+                    </a>
+                    <a href="https://raspi.share.zrok.io/clickhouse/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center ${import.meta.env.VITE_PLATFORM === 'github' ? 'opacity-50 grayscale' : ''}`}>
+                      <div className="flex justify-between w-full mb-1"><span className="font-mono">/clickhouse</span> <span className="text-blue-400 font-bold">Analysis DB</span></div>
+                      <span className="text-[10px] text-gray-500">High-Performance Column Store</span>
+                    </a>
+                    <a href="https://raspi.share.zrok.io/" target="_blank" rel="noreferrer" className={`block bg-[#1a1a1a] hover:bg-[#222] transition-colors px-3 py-2 rounded border border-gray-700 text-xs text-gray-300 flex flex-col justify-center ${import.meta.env.VITE_PLATFORM === 'github' ? 'opacity-50 grayscale' : ''}`}>
+                      <div className="flex justify-between w-full mb-1"><span className="font-mono">/</span> <span className="text-purple-400 font-bold">Llama.cpp</span></div>
+                      <span className="text-[10px] text-gray-500">Local LLM Inference</span>
+                    </a>
+                    <div className={`relative block bg-[#1a1a1a] hover:bg-indigo-950/30 transition-colors px-3 py-2 rounded border border-indigo-500/40 shadow-[0_0_15px_rgba(99,102,241,0.1)] text-xs text-gray-300 flex flex-col justify-center group/jellyfin ${import.meta.env.VITE_PLATFORM === 'github' ? 'opacity-50 grayscale' : ''}`}>
+                      <a href="https://raspi.share.zrok.io/jellyfin" target="_blank" rel="noreferrer" className="absolute inset-0 z-0"></a>
+                      <div className="flex justify-between w-full mb-1 relative z-10 pointer-events-none">
+                        <span className="font-mono">/jellyfin</span> 
+                        <span className="text-indigo-400 font-bold group-hover/jellyfin:text-indigo-300 transition-colors">Media Server</span>
+                      </div>
+                      <span className="text-[10px] text-indigo-300/80 italic relative z-10 pointer-events-none">
+                        <a href="mailto:kore.ameya@gmail.com?subject=Ben%2010%20Watch%20Party%20%F0%9F%91%BD" className="underline hover:text-indigo-200 pointer-events-auto transition-colors" title="Send email">Reach out</a> if you want to catch up on a few episodes of Ben 10! 👽🍿
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           {/* Observability Stack */}
           <div>
             <h3 className="text-white font-bold mb-4 flex items-center gap-2"><Activity size={16} className="text-red-400"/> Monitoring & Observability</h3>
