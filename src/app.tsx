@@ -495,39 +495,6 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       </div>
 
       {/* Row 3 */}
-      {/* Tile 5: Technical Writing & Rust FSM (Wide, 2x1) */}
-      <div 
-        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-[#F26522]/50 transition-colors relative overflow-hidden flex flex-col justify-between"
-        onClick={() => onSelect(projects.rustFsm)}
-      >
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#F26522]/5 rounded-full blur-3xl -mr-16 -mt-16 transition-all group-hover:bg-[#F26522]/10"></div>
-        
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-[#F26522] text-xs font-mono font-bold bg-[#F26522]/10 px-2 py-1 rounded">Medium Publication</span>
-            <span className="text-gray-500 text-xs flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-              100+ Claps
-            </span>
-          </div>
-          
-          <h2 className="text-xl font-bold text-white mb-2 group-hover:text-[#F26522] transition-colors">From Rust to Riches: Decoding Finite State Machines</h2>
-          <p className="text-gray-400 text-sm leading-relaxed max-w-lg">
-            A comprehensive technical guide to implementing FSMs in Rust, featuring a fully open-sourced UNO game engine codebase to demonstrate state transitions.
-          </p>
-        </div>
-        
-        <a 
-          href={projects.rustFsm.articleUrl} 
-          target="_blank" 
-          rel="noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-[#F26522] text-xs font-mono mt-4 opacity-80 hover:opacity-100 transition-opacity w-fit"
-        >
-          Read on Medium <ExternalLink size={12} />
-        </a>
-      </div>
-
       {/* Tile 6: DDoS Prevention (Wide, 2x1) */}
       <div 
         onClick={() => onSelect(projects.ddos)}
@@ -553,25 +520,69 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
       </div>
 
       {/* Row 4 */}
-      {/* Tile 7: RPL & AUV (Wide, 2x1) */}
+
+      {/* Tile 5: Technical Writing & Rust FSM (Large Square, 2x2) */}
       <div 
-        onClick={() => onSelect(projects.studentTeams)}
-        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 md:p-8 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-blue-500/50 transition-colors relative overflow-hidden flex items-center"
+        className="col-span-1 md:col-span-2 md:row-span-2 relative group cursor-pointer"
+        onClick={() => onSelect(projects.rustFsm)}
       >
-        <div className="absolute bottom-0 left-1/2 w-64 h-32 bg-blue-500/5 rounded-full blur-3xl -ml-32 transition-all group-hover:bg-blue-500/10"></div>
-        <div className="relative z-10 w-full flex justify-between items-center">
-          <div className="max-w-[80%]">
-            <div className="text-blue-400 text-xs font-mono mb-3">Hardware & Dynamics</div>
-            <h2 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Rocket Propulsion Lab & AUV</h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.
-            </p>
+        {/* Pulsing Aura */}
+        <div className="absolute -inset-1 bg-[#F26522]/20 rounded-2xl blur-xl transition-all duration-700 group-hover:bg-[#F26522]/40 group-hover:blur-2xl"></div>
+
+        <div className="relative h-full w-full rounded-2xl overflow-hidden border border-gray-800/60 group-hover:border-[#F26522]/50 bg-[#111] transition-all duration-700 min-h-[300px]">
+          <div className="absolute top-0 left-0 w-full h-[60%] overflow-hidden bg-black/40 flex items-center justify-center">
+            <img src="./assets/MediumArticleImage.jpeg" alt="Rust FSM Medium Article" className="w-full h-full object-contain object-center p-6 transition-transform duration-1000 group-hover:scale-105 opacity-90" />
           </div>
-          <div className="text-gray-600 group-hover:text-blue-400 transition-colors translate-x-0 group-hover:translate-x-1 duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          
+          <div className="absolute top-4 right-4 z-10">
+            <span className="bg-black/50 backdrop-blur-md border border-[#F26522]/30 text-[#F26522] text-[9px] md:text-[10px] font-mono font-bold px-2 py-1 rounded">Medium Publication</span>
+          </div>
+          
+          <div className="absolute bottom-6 left-6 right-6 z-10">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-gray-400 text-xs flex items-center gap-1 font-mono uppercase tracking-wider">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                100+ Claps
+              </span>
+            </div>
+            
+            <h2 className="text-2xl font-bold text-white mb-2 group-hover:text-[#F26522] transition-colors leading-tight">From Rust to Riches: Decoding Finite State Machines</h2>
+            <p className="text-gray-300 text-sm leading-relaxed max-w-lg mb-4">
+              A comprehensive technical guide to implementing FSMs in Rust, featuring a fully open-sourced UNO game engine.
+            </p>
+            
+            <a 
+              href={projects.rustFsm.articleUrl} 
+              target="_blank" 
+              rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1.5 text-[#F26522] text-[11px] font-mono opacity-80 hover:opacity-100 transition-opacity w-fit"
+            >
+              Read on Medium <ExternalLink size={12} />
+            </a>
           </div>
         </div>
       </div>
+
+      {/* Tile 7: RPL & AUV (Standard Square, 1x1) */}
+      <div 
+        onClick={() => onSelect(projects.studentTeams)}
+        className="col-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-blue-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+      >
+        <div className="absolute bottom-0 left-1/2 w-64 h-32 bg-blue-500/5 rounded-full blur-3xl -ml-32 transition-all group-hover:bg-blue-500/10"></div>
+        <div className="relative z-10 space-y-3">
+          <div className="text-blue-400 text-xs font-mono mb-3">Hardware & Dynamics</div>
+          <h2 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-blue-400 transition-colors">Rocket Propulsion Lab & AUV</h2>
+          <p className="text-gray-400 text-xs leading-relaxed">
+            Applying industry software practices to the USC Rocket Propulsion Lab and Autonomous Underwater Vehicle club.
+          </p>
+        </div>
+        <div className="relative z-10 mt-4 flex items-center gap-2 text-gray-600 group-hover:text-blue-400 transition-colors translate-x-0 group-hover:translate-x-1 duration-300">
+          <span className="text-xs font-mono">View Teams</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+      </div>
+
 
       {/* Tile 8: USC LASER Lab (Standard Square, 1x1) */}
       <div 
@@ -588,10 +599,11 @@ function ShowcaseGrid({ onSelect }: { onSelect: (project: any) => void }) {
         </div>
       </div>
 
-      {/* Tile 9: ESP32 Weather Network (Standard Square, 1x1) */}
+
+      {/* Tile 9: ESP32 Weather Network (Wide, 2x1) */}
       <div 
         onClick={() => onSelect(projects.weatherNetwork)}
-        className="md:col-span-1 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-cyan-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
+        className="md:col-span-2 md:row-span-1 bg-[#151515] p-6 group cursor-pointer rounded-2xl border border-gray-800/60 hover:border-cyan-500/50 transition-colors relative overflow-hidden flex flex-col justify-between"
       >
         <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-cyan-500/5 blur-3xl rounded-full transition-all group-hover:bg-cyan-500/10"></div>
         <div className="relative z-10">
